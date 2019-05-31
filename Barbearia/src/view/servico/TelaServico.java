@@ -5,7 +5,6 @@
  */
 package view.servico;
 
-import view.cliente.*;
 
 /**
  *
@@ -185,7 +184,7 @@ public class TelaServico extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-                int X = evt.getXOnScreen();
+        int X = evt.getXOnScreen();
         int Y = evt.getYOnScreen();
         
         AdicionarServico a = new AdicionarServico();
