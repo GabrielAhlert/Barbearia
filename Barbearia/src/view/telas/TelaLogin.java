@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Telas;
+package view.telas;
 
 import java.awt.Frame;
 import java.util.Arrays;
@@ -96,6 +96,11 @@ public class TelaLogin extends javax.swing.JFrame {
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
         jLogin.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLogin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLoginKeyPressed(evt);
+            }
+        });
         jPanel3.add(jLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 21, 199, 40));
 
         jLabel5.setBackground(new java.awt.Color(153, 153, 153));
@@ -178,6 +183,11 @@ public class TelaLogin extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jSenhaKeyPressed
+
+    private void jLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLoginKeyPressed
+        if(evt.getKeyCode() == 10)
+        jSenha.requestFocus(); 
+    }//GEN-LAST:event_jLoginKeyPressed
 
     /**
      * @param args the command line arguments
