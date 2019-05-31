@@ -7,6 +7,7 @@ package Telas;
 
 import java.awt.Frame;
 import javax.swing.JFrame;
+import view.cliente.TelaCliente;
 
 /**
  *
@@ -139,6 +140,14 @@ public class TelaAgenda extends javax.swing.JFrame {
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icons8-em-espiral-ligado-livreto-40.png"))); // NOI18N
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icons8-usuário-de-gênero-neutro-40.png"))); // NOI18N
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel7MousePressed(evt);
+            }
+        });
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icons8-recortar-40.png"))); // NOI18N
 
@@ -231,6 +240,20 @@ public class TelaAgenda extends javax.swing.JFrame {
             this.setExtendedState(0);
         }// TODO add your handling code here:
     }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+
+    }//GEN-LAST:event_jLabel7MouseClicked
+
+    private void jLabel7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MousePressed
+        int X = evt.getXOnScreen();
+        int Y = evt.getYOnScreen();
+        
+        TelaCliente a = new TelaCliente();
+        a.setLocation(X, Y);
+        a.setAlwaysOnTop (true);
+        a.setVisible(true);
+    }//GEN-LAST:event_jLabel7MousePressed
 
     /**
      * @param args the command line arguments

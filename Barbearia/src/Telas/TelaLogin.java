@@ -103,6 +103,11 @@ public class TelaLogin extends javax.swing.JFrame {
         jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 79, -1, -1));
 
         jSenha.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jSenhaKeyPressed(evt);
+            }
+        });
         jPanel3.add(jSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 89, 199, 40));
 
         jLabel6.setBackground(new java.awt.Color(153, 153, 153));
@@ -161,6 +166,18 @@ public class TelaLogin extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void jSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jSenhaKeyPressed
+        if(evt.getKeyCode() == 10){
+            if(jLogin.getText().equals("a")&& new String(jSenha.getPassword()).equals("a")){
+                this.dispose();
+                new TelaAgenda().setVisible(true);
+            }
+            else{
+                this.dispose();
+            }
+        }
+    }//GEN-LAST:event_jSenhaKeyPressed
 
     /**
      * @param args the command line arguments
