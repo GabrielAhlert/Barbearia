@@ -235,6 +235,9 @@
                   <Image iconType="3" name="/Imagens/icons8-recortar-40.png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel5MouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel8">
               <Properties>
@@ -242,6 +245,9 @@
                   <Image iconType="3" name="/Imagens/icons8-lata-de-cerveja-40.png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel8MouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

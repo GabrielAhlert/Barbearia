@@ -8,6 +8,8 @@ package Telas;
 import java.awt.Frame;
 import javax.swing.JFrame;
 import view.cliente.TelaCliente;
+import view.produto.TelaProduto;
+import view.servico.TelaServico;
 
 /**
  *
@@ -150,8 +152,18 @@ public class TelaAgenda extends javax.swing.JFrame {
         });
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icons8-recortar-40.png"))); // NOI18N
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icons8-lata-de-cerveja-40.png"))); // NOI18N
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel8MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -254,6 +266,26 @@ public class TelaAgenda extends javax.swing.JFrame {
         a.setAlwaysOnTop (true);
         a.setVisible(true);
     }//GEN-LAST:event_jLabel7MousePressed
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        int X = evt.getXOnScreen();
+        int Y = evt.getYOnScreen();
+        
+        TelaServico a = new TelaServico();
+        a.setLocation(X, Y);
+        a.setAlwaysOnTop (true);
+        a.setVisible(true);
+    }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+        int X = evt.getXOnScreen();
+        int Y = evt.getYOnScreen();
+        
+        TelaProduto a = new TelaProduto();
+        a.setLocation(X, Y);
+        a.setAlwaysOnTop (true);
+        a.setVisible(true);
+    }//GEN-LAST:event_jLabel8MouseClicked
 
     /**
      * @param args the command line arguments
