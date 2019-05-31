@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view.telas;
+package view.login;
 
 import java.awt.Frame;
 import java.util.Arrays;
+import view.telas.TelaAgenda;
 
 /**
  *
@@ -126,6 +127,11 @@ public class TelaLogin extends javax.swing.JFrame {
 
         jLabel7.setBackground(new java.awt.Color(153, 153, 153));
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icons8-configurações-50.png"))); // NOI18N
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+        });
         jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 147, -1, -1));
 
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, -1, -1));
@@ -188,6 +194,16 @@ public class TelaLogin extends javax.swing.JFrame {
         if(evt.getKeyCode() == 10)
         jSenha.requestFocus(); 
     }//GEN-LAST:event_jLoginKeyPressed
+
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+        int X = evt.getXOnScreen();
+        int Y = evt.getYOnScreen();
+        
+        TelaLoginMaster a = new TelaLoginMaster();
+        a.setLocation(X, Y);
+        a.setAlwaysOnTop (true);
+        a.setVisible(true);
+    }//GEN-LAST:event_jLabel7MouseClicked
 
     /**
      * @param args the command line arguments

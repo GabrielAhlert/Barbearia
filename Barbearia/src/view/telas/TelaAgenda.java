@@ -114,6 +114,8 @@ public class TelaAgenda extends javax.swing.JFrame {
             .addComponent(jLabel4)
         );
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
