@@ -45,9 +45,14 @@ public class TelaProduto extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                formFocusLost(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Produto");
@@ -232,6 +237,10 @@ public class TelaProduto extends javax.swing.JFrame {
         a.setVisible(true);
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void formFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusLost
+        this.dispose();
+    }//GEN-LAST:event_formFocusLost
 
     /**
      * @param args the command line arguments
