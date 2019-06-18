@@ -5,6 +5,8 @@
  */
 package view.produto;
 
+import javax.swing.table.DefaultTableModel;
+import model.dao.ProdutoDAO;
 import view.servico.*;
 
 
@@ -20,6 +22,22 @@ public class ListarProduto extends javax.swing.JFrame {
      */
     public ListarProduto() {
         initComponents();
+        mostra();
+    }
+    
+    void mostra(){
+        
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        ProdutoDAO pdao = new ProdutoDAO();
+        pdao.read().forEach((s) -> {
+            modelo.addRow(new Object[]{
+                
+                s.getNome(),
+                s.getPreco()
+                       
+            });
+        });
+        
     }
 
     /**
@@ -68,13 +86,10 @@ public class ListarProduto extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Produto", "Preço"
             }
         ));
         jScrollPane1.setViewportView(jTable1);

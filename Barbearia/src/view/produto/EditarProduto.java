@@ -5,6 +5,9 @@
  */
 package view.produto;
 
+import javax.swing.JOptionPane;
+import model.bean.Produto;
+import model.dao.ProdutoDAO;
 import view.servico.*;
 
 
@@ -19,6 +22,10 @@ public class EditarProduto extends javax.swing.JFrame {
      */
     public EditarProduto() {
         initComponents();
+        ProdutoDAO pdao = new ProdutoDAO();
+        for(Produto p: pdao.read()){
+           jComboBox1.addItem(p);
+        }
     }
 
     /**
@@ -35,7 +42,7 @@ public class EditarProduto extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        jFValor = new javax.swing.JFormattedTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
@@ -60,11 +67,11 @@ public class EditarProduto extends javax.swing.JFrame {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icons8-barato-2-50.png"))); // NOI18N
 
-        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("¤#,##0"))));
-        jFormattedTextField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jFormattedTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jFValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("¤#,##0"))));
+        jFValor.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jFValor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextField1ActionPerformed(evt);
+                jFValorActionPerformed(evt);
             }
         });
 
@@ -78,9 +85,13 @@ public class EditarProduto extends javax.swing.JFrame {
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icons8-divisa-circulada-à-direita-50.png"))); // NOI18N
         jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
 
         jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -105,7 +116,7 @@ public class EditarProduto extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jFValor, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(117, 117, 117)
                         .addComponent(jLabel1)))
@@ -124,7 +135,7 @@ public class EditarProduto extends javax.swing.JFrame {
                     .addComponent(jComboBox1))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jFormattedTextField1)
+                    .addComponent(jFValor)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,14 +162,46 @@ public class EditarProduto extends javax.swing.JFrame {
         this.dispose();   // TODO add your handling code here:
     }//GEN-LAST:event_jLabel5MouseClicked
 
-    private void jFormattedTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField1ActionPerformed
+    private void jFValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFValorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextField1ActionPerformed
+    }//GEN-LAST:event_jFValorActionPerformed
 
     private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_formWindowLostFocus
 
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+       
+        Produto p = new Produto();
+        ProdutoDAO pdao = new ProdutoDAO();
+        Produto produto = (Produto) jComboBox1.getSelectedItem(); 
+        
+        if(check()){
+            
+            p.setCodigo(produto.getCodigo());
+            p.setNome(produto.getNome());
+            p.setPreco(Double.parseDouble(jFValor.getText().toString()));
+            
+            boolean resultado = pdao.updateProduto(p);
+            
+            if(resultado){
+              JOptionPane.showMessageDialog(null, "Update efetuado com sucesso");  
+            }else{
+              JOptionPane.showMessageDialog(null, "Update não efetuado","ERRO",2);  
+            }
+        }else{
+           JOptionPane.showMessageDialog(null, "Update não efetuado, nenhum dado alterado","ERRO",2);
+        }
+        
+    }//GEN-LAST:event_jLabel6MouseClicked
+    
+    boolean check(){
+        if(jFValor.getText().toString().isEmpty()){
+            return false;
+        }
+        return true;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -202,8 +245,8 @@ public class EditarProduto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
+    private javax.swing.JComboBox<Object> jComboBox1;
+    private javax.swing.JFormattedTextField jFValor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

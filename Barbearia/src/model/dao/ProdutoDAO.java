@@ -38,12 +38,11 @@ public class ProdutoDAO {
     }
     
         public boolean updateProduto(Produto p) {
-        String sql = "UPDATE produto SET preco = ?, nome = ? WHERE codigo = ?";//"sintax padrão do SQL"
+        String sql = "UPDATE produto SET preco = ? WHERE codigo = ?";//"sintax padrão do SQL"
         try {
             PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);
             ps.setDouble(1, p.getPreco());
-            ps.setString(2, p.getNome());
-            ps.setInt(3, p.getCodigo());
+            ps.setInt(2, p.getCodigo());
             ps.executeUpdate();
             return true;
         } catch (SQLException | ClassNotFoundException ex) {
