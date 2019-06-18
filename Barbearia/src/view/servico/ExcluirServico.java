@@ -5,6 +5,10 @@
  */
 package view.servico;
 
+import javax.swing.JOptionPane;
+import model.bean.Servico;
+import model.dao.ServicoDAO;
+
 
 /**
  *
@@ -17,6 +21,10 @@ public class ExcluirServico extends javax.swing.JFrame {
      */
     public ExcluirServico() {
         initComponents();
+         ServicoDAO sdao = new ServicoDAO();
+        for(Servico s: sdao.read()){
+           jComboBox1.addItem(s);
+        }
     }
 
     /**
@@ -64,9 +72,13 @@ public class ExcluirServico extends javax.swing.JFrame {
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icons8-divisa-circulada-à-direita-50.png"))); // NOI18N
         jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
 
         jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -130,6 +142,19 @@ public class ExcluirServico extends javax.swing.JFrame {
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_formWindowLostFocus
 
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        
+        Servico s = (Servico) jComboBox1.getSelectedItem();
+        ServicoDAO sdao = new ServicoDAO();
+        boolean resultado = sdao.ExcluirServico(s);
+        if (resultado){
+            JOptionPane.showMessageDialog(null, "Exclusão feita com sucesso!");
+        }else{
+            JOptionPane.showMessageDialog(null, "Exclusão não efetuada","ERRO",2);
+        }
+        
+    }//GEN-LAST:event_jLabel6MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -173,7 +198,7 @@ public class ExcluirServico extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<Object> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
