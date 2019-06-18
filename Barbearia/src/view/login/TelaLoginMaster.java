@@ -5,6 +5,8 @@
  */
 package view.login;
 
+import view.master.TelaMaster;
+
 /**
  *
  * @author Windows
@@ -140,7 +142,7 @@ public class TelaLoginMaster extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        this.dispose();        // TODO add your handling code here:
+        this.dispose(); 
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void jSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jSenhaKeyPressed
