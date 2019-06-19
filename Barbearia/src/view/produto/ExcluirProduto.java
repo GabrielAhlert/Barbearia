@@ -140,7 +140,7 @@ public class ExcluirProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
-        this.dispose();        // TODO add your handling code here:
+        //this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_formWindowLostFocus
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
@@ -149,9 +149,9 @@ public class ExcluirProduto extends javax.swing.JFrame {
         ProdutoDAO pdao = new ProdutoDAO();
         boolean resultado = pdao.ExcluirProduto(p);
         if (resultado){
-            JOptionPane.showMessageDialog(null, "Exclusão feita com sucesso!");
+            JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
         }else{
-            JOptionPane.showMessageDialog(null, "Exclusão não efetuada","ERRO",2);
+            JOptionPane.showMessageDialog(this, "Exclusão não efetuada","ERRO",2);
         }
         
     }//GEN-LAST:event_jLabel6MouseClicked

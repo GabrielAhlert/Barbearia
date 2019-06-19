@@ -135,7 +135,7 @@ public class ListarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
-        this.dispose();        // TODO add your handling code here:
+//        this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_formWindowLostFocus
     
     void mostra(){

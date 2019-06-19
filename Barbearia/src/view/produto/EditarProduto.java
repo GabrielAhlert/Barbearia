@@ -167,7 +167,7 @@ public class EditarProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_jFValorActionPerformed
 
     private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
-        this.dispose();        // TODO add your handling code here:
+        //this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_formWindowLostFocus
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
@@ -185,12 +185,12 @@ public class EditarProduto extends javax.swing.JFrame {
             boolean resultado = pdao.updateProduto(p);
             
             if(resultado){
-              JOptionPane.showMessageDialog(null, "Update efetuado com sucesso");  
+              JOptionPane.showMessageDialog(this, "Update efetuado com sucesso");  
             }else{
-              JOptionPane.showMessageDialog(null, "Update não efetuado","ERRO",2);  
+              JOptionPane.showMessageDialog(this, "Update não efetuado","ERRO",2);  
             }
         }else{
-           JOptionPane.showMessageDialog(null, "Update não efetuado, nenhum dado alterado","ERRO",2);
+           JOptionPane.showMessageDialog(this, "Update não efetuado, nenhum dado alterado","ERRO",2);
         }
         
     }//GEN-LAST:event_jLabel6MouseClicked

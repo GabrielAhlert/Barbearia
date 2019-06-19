@@ -194,7 +194,7 @@ public class AdicionarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
-        this.dispose();        // TODO add your handling code here:
+        //this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_formWindowLostFocus
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
@@ -203,18 +203,30 @@ public class AdicionarCliente extends javax.swing.JFrame {
         cliente.setCelular(jFCelular.getText());
         cliente.setEmail(jTEmail.getText());
         cliente.setNome(jTNome.getText());
-        
-        ClienteDAO cdao = new ClienteDAO();
+        if(check()){
+             ClienteDAO cdao = new ClienteDAO();
         boolean resultado = cdao.inserirCliente(cliente);
         
         if(resultado){
-            JOptionPane.showMessageDialog(null, "Sucesso","ERRO",2);
+                JOptionPane.showMessageDialog(this, "Sucesso");
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(this, "Cadastro não efetuado","ERRO",2);
+            }
         }else{
-             JOptionPane.showMessageDialog(null, "Cadastro não efetuado, dados invalidos","ERRO",2);
+               JOptionPane.showMessageDialog(this, "Cadastro não efetuado, dados invalidos","ERRO",2);
         }
+       
         
     }//GEN-LAST:event_jLabel6MouseClicked
 
+    boolean check(){
+        if(jTNome.getText().toString().isEmpty()){
+            return false;
+        }
+        return true;
+    }
+    
     /**
      * @param args the command line arguments
      */

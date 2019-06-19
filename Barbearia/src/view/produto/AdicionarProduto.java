@@ -171,7 +171,7 @@ public class AdicionarProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_jFValorActionPerformed
 
     private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
-        this.dispose();        // TODO add your handling code here:
+        //this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_formWindowLostFocus
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
@@ -186,20 +186,20 @@ public class AdicionarProduto extends javax.swing.JFrame {
             
             boolean resultado = pdao.inserirProduto(p);
             if(resultado){
-            JOptionPane.showMessageDialog(null, "Cadastro efetuado com sucesso");
-
+            JOptionPane.showMessageDialog(this, "Produto: "+jTNome.getText()+" cadastrado com sucesso");
+            this.dispose();
             }else{
-            JOptionPane.showMessageDialog(null, "Cadastro não efetuado","ERRO",2);
+            JOptionPane.showMessageDialog(this, "Cadastro não efetuado","ERRO",2);
             }
         }else{
-            JOptionPane.showMessageDialog(null, "Cadastro não efetuado, campo em branco","ERRO",2);
+            JOptionPane.showMessageDialog(this, "Cadastro não efetuado, campo em branco","ERRO",2);
         }
         
         
     }//GEN-LAST:event_jLabel6MouseClicked
 
     boolean check(){
-        if(jTNome.getText().toString().isEmpty() && jFValor.getText().toString().isEmpty()){
+        if(jTNome.getText().toString().isEmpty() || jFValor.getText().toString().isEmpty()){
             return false;
         }
         return true;
