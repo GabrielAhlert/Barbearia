@@ -1,0 +1,33 @@
+CREATE TABLE produto(
+	codigo SERIAL,
+	nome_produto VARCHAR NOT NULL,
+	preco DOUBLE PRECISION NOT NULL,
+	CONSTRAINT pk_produto PRIMARY KEY (codigo)
+)
+
+CREATE TABLE servico(
+	codigo SERIAL,
+	nome_servico VARCHAR NOT NULL,
+	preco DOUBLE PRECISION NOT NULL,
+	CONSTRAINT pk_servico PRIMARY KEY (codigo)
+)
+
+CREATE TABLE cliente(
+	codigo SERIAL,
+	nome VARCHAR NOT NULL,
+	email VARCHAR,
+	telefone VARCHAR,
+	CONSTRAINT pk_cliente PRIMARY KEY (codigo)
+
+)
+
+CREATE TABLE agendamento(
+	data_hora TIMESTAMP NOT NULL,
+	valor_total DOUBLE PRECISION,
+	cod_servico INTEGER NOT NULL,
+	cod_cliente INTEGER NOT NULL,
+	CONSTRAINT pk_agendamento PRIMARY KEY (data_hora),
+	CONSTRAINT fk_servico FOREIGN KEY (cod_servico) REFERENCES servico (codigo),
+	CONSTRAINT fk_cliente FOREIGN KEY (cod_cliente) REFERENCES cliente (codigo)
+
+)
