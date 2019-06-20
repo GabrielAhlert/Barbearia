@@ -82,6 +82,8 @@ public class AgendamentoDAO {
                 resultados.add(a);
                 
             }
+            rs.close();
+            ps.close();
             Collections.sort(resultados);
             return resultados;
             
@@ -91,6 +93,19 @@ public class AgendamentoDAO {
         }
        
         
+    }
+    
+    public boolean excluirAgendamento(Agendamento c) {
+        String sql = "DELETE FROM agendamento WHERE data_hora = ?";//"sintax padrão do SQL"
+        try {
+            PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);
+            ps.setTimestamp(1, c.getDataH());
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
     }
      
     

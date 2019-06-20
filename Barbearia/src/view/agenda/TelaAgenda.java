@@ -7,6 +7,9 @@ package view.agenda;
 
 import java.awt.Frame;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
+import model.dao.AgendamentoDAO;
+import model.dao.ClienteDAO;
 import view.agendamento.AdicionarAgendamento;
 import view.agendamento.RemoverAgendamento;
 import view.cliente.TelaCliente;
@@ -28,8 +31,38 @@ public class TelaAgenda extends javax.swing.JFrame {
     public TelaAgenda() {
         initComponents();
         this.setExtendedState(0);
+      
+    }
+    
+    public void limpaTabela(){
+        DefaultTableModel tblRemove = (DefaultTableModel)jTable1.getModel();
+       
+        while(tblRemove.getRowCount() > 0){
+            tblRemove.removeRow(0);
+        }
+    }
+    
+    @Override
+    public void revalidate() {
+        mostra(); //To change body of generated methods, choose Tools | Templates.
     }
 
+        void mostra(){
+        limpaTabela();
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        AgendamentoDAO adao = new AgendamentoDAO();
+        adao.read().forEach((s) -> {
+            modelo.addRow(new Object[]{
+   
+                s.toString(),
+                s.getCliente().getNome(),
+                s.getServico().getNome()
+                
+                       
+            });
+        });
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -62,9 +95,19 @@ public class TelaAgenda extends javax.swing.JFrame {
         setExtendedState(2);
         setLocationByPlatform(true);
         setUndecorated(true);
+        addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                formFocusGained(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 204));
         jPanel1.setBorder(new javax.swing.border.MatteBorder(null));
+        jPanel1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jPanel1FocusLost(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -134,6 +177,11 @@ public class TelaAgenda extends javax.swing.JFrame {
                 "Data/hora", "Nome", "Servico", "Produto(s)", "Valor total"
             }
         ));
+        jTable1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTable1FocusGained(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -144,7 +192,9 @@ public class TelaAgenda extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel4.setBackground(new java.awt.Color(153, 153, 153));
@@ -264,9 +314,9 @@ public class TelaAgenda extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -277,7 +327,9 @@ public class TelaAgenda extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 93, Short.MAX_VALUE))
         );
 
         pack();
@@ -339,7 +391,6 @@ public class TelaAgenda extends javax.swing.JFrame {
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
         int X = evt.getXOnScreen();
         int Y = evt.getYOnScreen();
-        
         TelaProduto a = new TelaProduto();
         a.setLocation(X, Y);
         a.setAlwaysOnTop (true);
@@ -384,6 +435,18 @@ public class TelaAgenda extends javax.swing.JFrame {
         a.setAlwaysOnTop (true);
         a.setVisible(true); 
     }//GEN-LAST:event_jLabel12MouseClicked
+
+    private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
+        //this.mostra();
+    }//GEN-LAST:event_formFocusGained
+
+    private void jPanel1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanel1FocusLost
+     
+    }//GEN-LAST:event_jPanel1FocusLost
+
+    private void jTable1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTable1FocusGained
+        this.revalidate();
+    }//GEN-LAST:event_jTable1FocusGained
 
     /**
      * @param args the command line arguments

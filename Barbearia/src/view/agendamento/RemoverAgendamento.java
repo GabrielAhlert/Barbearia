@@ -5,10 +5,14 @@
  */
 package view.agendamento;
 
+import javax.swing.JOptionPane;
 import model.bean.Agendamento;
+import model.bean.Cliente;
 import model.bean.Servico;
 import model.dao.AgendamentoDAO;
+import model.dao.ClienteDAO;
 import model.dao.ServicoDAO;
+import view.agenda.TelaAgenda;
 
 /**
  *
@@ -23,7 +27,7 @@ public class RemoverAgendamento extends javax.swing.JFrame {
         initComponents();
         AgendamentoDAO sdao = new AgendamentoDAO();
         for(Agendamento a: sdao.read()){
-           jComboBox5.addItem(a);
+           jComboBox1.addItem(a);
         }
     }
 
@@ -43,7 +47,7 @@ public class RemoverAgendamento extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox5 = new javax.swing.JComboBox<>();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
 
         jComboBox2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -82,11 +86,16 @@ public class RemoverAgendamento extends javax.swing.JFrame {
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icons8-divisa-circulada-à-direita-50.png"))); // NOI18N
         jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+        });
 
-        jComboBox5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jComboBox5.addActionListener(new java.awt.event.ActionListener() {
+        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox5ActionPerformed(evt);
+                jComboBox1ActionPerformed(evt);
             }
         });
 
@@ -105,7 +114,7 @@ public class RemoverAgendamento extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addComponent(jLabel8)
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(33, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(97, 97, 97)
@@ -124,7 +133,7 @@ public class RemoverAgendamento extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
@@ -152,16 +161,30 @@ public class RemoverAgendamento extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
-        this.dispose();        // TODO add your handling code here:
+       // this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_formWindowLostFocus
 
-    private void jComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox5ActionPerformed
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox5ActionPerformed
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
         this.dispose();   // TODO add your handling code here:
     }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+      Agendamento a = (Agendamento) jComboBox1.getSelectedItem();
+        AgendamentoDAO adao = new AgendamentoDAO();
+        boolean resultado = adao.excluirAgendamento(a);
+        if (resultado){
+            JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
+            TelaAgenda frame = new TelaAgenda();
+            frame.revalidate();
+            this.dispose();
+        }else{
+            JOptionPane.showMessageDialog(this, "Exclusão não efetuada","ERRO",2);
+        }
+    }//GEN-LAST:event_jLabel7MouseClicked
 
     /**
      * @param args the command line arguments
@@ -200,8 +223,8 @@ public class RemoverAgendamento extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<Object> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<Object> jComboBox5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

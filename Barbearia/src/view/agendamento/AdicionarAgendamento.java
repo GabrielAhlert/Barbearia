@@ -5,6 +5,7 @@
  */
 package view.agendamento;
 
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -274,15 +275,17 @@ public class AdicionarAgendamento extends javax.swing.JFrame {
         Date d =  new Date();
         SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat sd1 = new SimpleDateFormat("yyyy/MM/dd");//formato do banco ano mes dia
+        SimpleDateFormat sd2 = new SimpleDateFormat("yyyy/MM/dd HH:mm");//formato do banco ano mes dia
         
         try {
             Date da = sd.parse(a.getData());
+            Date dd = sd.parse(a.getDataHora());
             JOptionPane.showMessageDialog(this,sd1.format(da));
             a.setData(sd1.format(da));
         } catch (ParseException ex) {
             Logger.getLogger(AdicionarAgendamento.class.getName()).log(Level.SEVERE, null, ex);
         }
-       //a.setDataH(d);
+      
         
         boolean resultado = adao.inserirAgendamento(a);
         if(resultado){
