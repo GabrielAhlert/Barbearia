@@ -273,7 +273,8 @@ public class AdicionarAgendamento extends javax.swing.JFrame {
        
         Date d =  new Date();
         SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
-        SimpleDateFormat sd1 = new SimpleDateFormat("MM/dd/yyyy");
+        SimpleDateFormat sd1 = new SimpleDateFormat("yyyy/MM/dd");//formato do banco ano mes dia
+        
         try {
             Date da = sd.parse(a.getData());
             JOptionPane.showMessageDialog(this,sd1.format(da));
@@ -281,7 +282,7 @@ public class AdicionarAgendamento extends javax.swing.JFrame {
         } catch (ParseException ex) {
             Logger.getLogger(AdicionarAgendamento.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
+       //a.setDataH(d);
         
         boolean resultado = adao.inserirAgendamento(a);
         if(resultado){

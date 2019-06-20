@@ -6,16 +6,22 @@
 package model.bean;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import view.agendamento.AdicionarAgendamento;
 
 /**
  *
  * @author Gabriel Missio
  */
-public class Agendamento {
+public class Agendamento implements Comparable {
 
     public String getData() {
-        return data;
+        return this.data;
     }
 
     public void setData(String data) {
@@ -55,8 +61,6 @@ public class Agendamento {
     }
    
     public String getDataHora(){
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy");
         
         return this.data + " " + this.hora;
         
@@ -81,5 +85,23 @@ public class Agendamento {
     private Cliente cliente;
     private Servico servico;
     private Timestamp data_hora;
+
+    @Override
+    public String toString() {
+        Date d =  new Date();
+        SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sd1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");//formato do banco ano mes dia
+        d = this.data_hora;
+       
+        return String.valueOf(sd1.format(d)) ;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Agendamento a = (Agendamento) o;
+        return this.data_hora.compareTo(a.getDataH());
+    }
+    
+    
     
 }

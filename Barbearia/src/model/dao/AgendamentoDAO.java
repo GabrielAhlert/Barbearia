@@ -50,7 +50,7 @@ public class AgendamentoDAO {
           
         List<Agendamento>  resultados = new ArrayList<>();  
         String sql = "SELECT data_hora, valor_total, cod_servico, " +
-                    "cod_cliente, nome, preco FROM agendamento JOIN cliente ON cliente.codigo = agendamento.cod_cliente " +
+                    "cod_cliente, nome, preco, nome_servico FROM agendamento JOIN cliente ON cliente.codigo = agendamento.cod_cliente " +
                     "JOIN servico ON servico.codigo = cod_servico";
         PreparedStatement ps;
         ResultSet rs;
@@ -64,7 +64,13 @@ public class AgendamentoDAO {
                 Agendamento a = new Agendamento();
                 Servico s = new Servico();
                 Cliente c = new Cliente();
-//                s.setPreco(rs.getDouble("preco"));
+                c.setNome(rs.getString("nome"));
+                c.setCodigo(rs.getInt("cod_cliente"));
+                s.setNome(rs.getString("nome_servico"));
+                s.setCodigo(rs.getInt("cod_servico"));
+                a.setServico(s);
+                a.setCliente(c);
+                a.setDataH(rs.getTimestamp("data_hora"));
                 
 //                //nome da tabela do banco de dados
 //                a.setDataH(rs.getString("data_hora"));
@@ -73,10 +79,10 @@ public class AgendamentoDAO {
 ////                c.setNome(rs.getString("nome"));
 ////                c.setCelular(rs.getString("telefone"));
 ////                c.setEmail(rs.getString("email"));
-//                resultados.add(a);
+                resultados.add(a);
                 
             }
-           // Collections.sort(resultados);
+            Collections.sort(resultados);
             return resultados;
             
         } catch (SQLException | ClassNotFoundException ex) {
