@@ -5,11 +5,16 @@
  */
 package view.agendamento;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import model.bean.Agendamento;
 import model.bean.Cliente;
 import model.bean.Servico;
+import model.dao.AgendamentoDAO;
 import model.dao.ClienteDAO;
 import model.dao.ServicoDAO;
 
@@ -94,7 +99,6 @@ public class AdicionarAgendamento extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icons8-usuário-50.png"))); // NOI18N
 
         jComboBoxCliente.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jComboBoxCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cliente não cadastrado" }));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icons8-tempo-50_1.png"))); // NOI18N
 
@@ -132,6 +136,11 @@ public class AdicionarAgendamento extends javax.swing.JFrame {
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icons8-divisa-circulada-à-direita-50.png"))); // NOI18N
         jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+        });
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icons8-recortar-50.png"))); // NOI18N
 
@@ -239,7 +248,7 @@ public class AdicionarAgendamento extends javax.swing.JFrame {
 
     private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
 
-        this.dispose();        // TODO add your handling code here:
+//        this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_formWindowLostFocus
 
     private void jFormattedTextField2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFormattedTextField2FocusGained
@@ -250,6 +259,40 @@ public class AdicionarAgendamento extends javax.swing.JFrame {
        
     }//GEN-LAST:event_jFormattedTextField2FocusLost
 
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+       
+        Agendamento a = new Agendamento();
+        AgendamentoDAO adao = new AgendamentoDAO();
+        Servico s = (Servico) jComboBoxServico.getSelectedItem();
+        Cliente c = (Cliente) jComboBoxCliente.getSelectedItem();
+        
+        a.setCliente(c);
+        a.setServico(s);
+        
+        a.setDataHora(jFormattedTextField2.getText(), jFormattedTextField3.getText());
+       
+        Date d =  new Date();
+        SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sd1 = new SimpleDateFormat("MM/dd/yyyy");
+        try {
+            Date da = sd.parse(a.getData());
+            JOptionPane.showMessageDialog(this,sd1.format(da));
+            a.setData(sd1.format(da));
+        } catch (ParseException ex) {
+            Logger.getLogger(AdicionarAgendamento.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        
+        boolean resultado = adao.inserirAgendamento(a);
+        if(resultado){
+             JOptionPane.showMessageDialog(this, "Agendamento efetuado com sucesso");
+        }else{
+             JOptionPane.showMessageDialog(this, "Erro ao efetuar o agendamento","ERRO",2);
+
+        }
+        
+    }//GEN-LAST:event_jLabel7MouseClicked
+       
   public String getDataAtual() {        
     SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
     Date dataAtual = new Date(System.currentTimeMillis());

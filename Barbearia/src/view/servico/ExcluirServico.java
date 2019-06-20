@@ -149,6 +149,7 @@ public class ExcluirServico extends javax.swing.JFrame {
         boolean resultado = sdao.ExcluirServico(s);
         if (resultado){
             JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
+            this.dispose();
         }else{
             JOptionPane.showMessageDialog(this, "Exclusão não efetuada","ERRO",2);
         }

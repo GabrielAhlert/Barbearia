@@ -23,7 +23,7 @@ import model.bean.Servico;
 public class ServicoDAO {
     
     public boolean inserirServico(Servico s) {
-        String sql = "INSERT INTO servico (nome, preco) VALUES (?, ?)";//"sintax padrão do SQL"
+        String sql = "INSERT INTO servico (nome_servico, preco) VALUES (?, ?)";//"sintax padrão do SQL"
         try {
             PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);
             ps.setString(1, s.getNome());
@@ -68,7 +68,7 @@ public class ServicoDAO {
       public List<Servico> read() {
           
         List<Servico>  resultados = new ArrayList<>();  
-        String sql = "SELECT codigo, nome, preco FROM servico";
+        String sql = "SELECT codigo, nome_servico, preco FROM servico";
         PreparedStatement ps;
         ResultSet rs;
         
@@ -81,7 +81,7 @@ public class ServicoDAO {
                 Servico s = new Servico();
                 
                 s.setCodigo(rs.getInt("codigo"));
-                s.setNome(rs.getString("nome"));
+                s.setNome(rs.getString("nome_servico"));
                 s.setPreco(rs.getDouble("preco"));
                 resultados.add(s);
                 

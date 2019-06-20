@@ -150,6 +150,7 @@ public class ExcluirProduto extends javax.swing.JFrame {
         boolean resultado = pdao.ExcluirProduto(p);
         if (resultado){
             JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
+            this.dispose();
         }else{
             JOptionPane.showMessageDialog(this, "Exclusão não efetuada","ERRO",2);
         }

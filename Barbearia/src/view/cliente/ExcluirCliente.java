@@ -147,6 +147,7 @@ public class ExcluirCliente extends javax.swing.JFrame {
         boolean resultado = pdao.excluirCliente(c);
         if (resultado){
             JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
+            this.dispose();
         }else{
             JOptionPane.showMessageDialog(this, "Exclusão não efetuada","ERRO",2);
         }

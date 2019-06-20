@@ -24,7 +24,7 @@ import model.bean.Produto;
 public class ProdutoDAO {
     
     public boolean inserirProduto(Produto p) {
-        String sql = "INSERT INTO produto (nome, preco) VALUES (?, ?)";//"sintax padrão do SQL"
+        String sql = "INSERT INTO produto (nome_produto, preco) VALUES (?, ?)";//"sintax padrão do SQL"
         try {
             PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);
             ps.setString(1, p.getNome());
@@ -67,7 +67,7 @@ public class ProdutoDAO {
         public List<Produto> read() {
           
         List<Produto>  resultados = new ArrayList<>();  
-        String sql = "SELECT codigo, nome, preco FROM produto";
+        String sql = "SELECT codigo, nome_produto, preco FROM produto";
         PreparedStatement ps;
         ResultSet rs;
         
@@ -80,7 +80,7 @@ public class ProdutoDAO {
                 Produto p = new Produto();
                 
                 p.setCodigo(rs.getInt("codigo"));
-                p.setNome(rs.getString("nome"));
+                p.setNome(rs.getString("nome_produto"));
                 p.setPreco(rs.getDouble("preco"));
                 resultados.add(p);
                 
