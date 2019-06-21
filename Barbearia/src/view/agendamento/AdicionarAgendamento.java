@@ -271,7 +271,7 @@ public class AdicionarAgendamento extends javax.swing.JFrame {
         a.setServico(s);
         
         a.setDataHora(jFormattedTextField2.getText(), jFormattedTextField3.getText());
-       
+        
         Date d =  new Date();
         SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat sd1 = new SimpleDateFormat("yyyy/MM/dd");//formato do banco ano mes dia
@@ -279,8 +279,11 @@ public class AdicionarAgendamento extends javax.swing.JFrame {
         
         try {
             Date da = sd.parse(a.getData());
-            Date dd = sd.parse(a.getDataHora());
-            JOptionPane.showMessageDialog(this,sd1.format(da));
+            Date dd = new Date(System.currentTimeMillis());
+            
+//            int i = da.compareTo(dd);
+//            JOptionPane.showMessageDialog(this, i);
+            
             a.setData(sd1.format(da));
         } catch (ParseException ex) {
             Logger.getLogger(AdicionarAgendamento.class.getName()).log(Level.SEVERE, null, ex);
@@ -290,6 +293,7 @@ public class AdicionarAgendamento extends javax.swing.JFrame {
         boolean resultado = adao.inserirAgendamento(a);
         if(resultado){
              JOptionPane.showMessageDialog(this, "Agendamento efetuado com sucesso");
+             this.dispose();
         }else{
              JOptionPane.showMessageDialog(this, "Erro ao efetuar o agendamento","ERRO",2);
 
