@@ -8,6 +8,7 @@ package view.produtoagendamento;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.table.DefaultTableModel;
 import model.bean.Agendamento;
 import model.bean.Produto;
 import model.bean.ProdutoAgendamento;
@@ -62,6 +63,8 @@ public class AdicionarProdutoAgendado extends javax.swing.JFrame {
         jComboBox6 = new javax.swing.JComboBox<>();
         jSeparator3 = new javax.swing.JSeparator();
         jComboBox3 = new javax.swing.JComboBox<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
 
         jComboBox2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -120,8 +123,28 @@ public class AdicionarProdutoAgendado extends javax.swing.JFrame {
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icons8-lata-de-cerveja-50.png"))); // NOI18N
 
         jComboBox6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jComboBox6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox6ActionPerformed(evt);
+            }
+        });
+        jComboBox6.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
+            public void vetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {
+                jComboBox6VetoableChange(evt);
+            }
+        });
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" }));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" }));
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Produto", "Quantidade", "Valor unidade", "Valor total"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -151,6 +174,10 @@ public class AdicionarProdutoAgendado extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,9 +201,11 @@ public class AdicionarProdutoAgendado extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jComboBox3)
                             .addComponent(jComboBox4, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))))
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -230,12 +259,69 @@ public class AdicionarProdutoAgendado extends javax.swing.JFrame {
        
        if(resultado){
            JOptionPane.showMessageDialog(this, "Sucesso"); 
+           this.preenche();
        }else{
-           JOptionPane.showMessageDialog(this, "Erro"); 
+           boolean resultado1 = padao.updateProdutoAgendamento(pa);
+           if(resultado1){
+           JOptionPane.showMessageDialog(this, "quantia atualizada");   
+           this.preenche();
+           }else{
+             JOptionPane.showMessageDialog(this, "fatal error kk");     
+           }
        }
        
     }//GEN-LAST:event_jLabel7MouseClicked
 
+    
+     public void limpaTabela(){
+        DefaultTableModel tblRemove = (DefaultTableModel)jTable2.getModel();
+       
+        while(tblRemove.getRowCount() > 0){
+            tblRemove.removeRow(0);
+        }
+    }
+    
+    private void jComboBox6VetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_jComboBox6VetoableChange
+       
+        limpaTabela();
+        DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
+        ProdutoAgendamentoDAO padao = new ProdutoAgendamentoDAO();
+        Agendamento pa = (Agendamento) jComboBox4.getSelectedItem();
+        padao.readP(pa.getDataH()).forEach((s) -> {
+            modelo.addRow(new Object[]{
+   
+                s.getProduto().getNome(),
+                s.getQuantidades(),
+                s.getProduto().getPreco(),
+                s.getValorTotal()
+                
+                       
+            });
+        });
+        
+        
+    }//GEN-LAST:event_jComboBox6VetoableChange
+
+    private void jComboBox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox6ActionPerformed
+        this.preenche();
+    }//GEN-LAST:event_jComboBox6ActionPerformed
+    public void preenche(){
+        limpaTabela();
+        DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
+        ProdutoAgendamentoDAO padao = new ProdutoAgendamentoDAO();
+        Agendamento pa = (Agendamento) jComboBox6.getSelectedItem();
+        padao.readP(pa.getDataH()).forEach((s) -> {
+            modelo.addRow(new Object[]{
+   
+                s.getProduto().getNome(),
+                s.getQuantidades(),
+                s.getProduto().getPreco(),
+                s.getValorTotal()
+                
+                       
+            });
+        });
+    }
     /**
      * @param args the command line arguments
      */
@@ -287,8 +373,10 @@ public class AdicionarProdutoAgendado extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
 }

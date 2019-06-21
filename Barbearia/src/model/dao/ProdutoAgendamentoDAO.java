@@ -64,7 +64,7 @@ public class ProdutoAgendamentoDAO {
         List<ProdutoAgendamento>  resultados = new ArrayList<>();  
         String sql = "SELECT nome_produto, preco, cod_produto, cod_agendamento, quantidade FROM produto_agendamento pa " +
                      "JOIN produto ON produto.codigo = pa.cod_produto " +
-                      "JOIN agendamento ON agendamento.data_hora = pa.cod_agendamento WHERE cod_agendamento = '"+t+"'";
+                      "JOIN agendamento ON agendamento.data_hora = pa.cod_agendamento WHERE cod_agendamento = '"+t+"' AND quantidade > 0";
         PreparedStatement ps;
         ResultSet rs;
         
@@ -114,9 +114,11 @@ public class ProdutoAgendamentoDAO {
     public List<ProdutoAgendamento> read() {
           
         List<ProdutoAgendamento>  resultados = new ArrayList<>();  
-        String sql = "SELECT nome_produto, preco, cod_produto, cod_agendamento, quantidade FROM produto_agendamento pa " +
+        String sql = "SELECT nome_produto, preco, cod_produto, cod_agendamento, quantidade, cod_cliente, nome " +
+                     "FROM produto_agendamento pa " +
                      "JOIN produto ON produto.codigo = pa.cod_produto " +
-                      "JOIN agendamento ON agendamento.data_hora = pa.cod_agendamento";
+                     "JOIN agendamento ON agendamento.data_hora = pa.cod_agendamento " +
+                     "JOIN cliente ON cliente.codigo = agendamento.cod_cliente";
         PreparedStatement ps;
         ResultSet rs;
         
@@ -129,7 +131,10 @@ public class ProdutoAgendamentoDAO {
                 Agendamento a = new Agendamento();
                 Produto p = new Produto();
                 ProdutoAgendamento pa = new ProdutoAgendamento();
-               
+                Servico s = new Servico();
+                Cliente c = new Cliente();
+                
+                c.setNome(rs.getString("nome"));
                 p.setCodigo(rs.getInt("cod_produto"));
                 p.setPreco(rs.getDouble("preco"));
                 p.setNome(rs.getString("nome_produto"));
@@ -163,6 +168,8 @@ public class ProdutoAgendamentoDAO {
        
         
     }
+    
+    
     
        public boolean excluirProdutoAgendamento(ProdutoAgendamento pa) {
         String sql = "DELETE FROM produto_agendamento WHERE cod_agendamento = ? AND cod_produto = ?";//"sintax padrão do SQL"

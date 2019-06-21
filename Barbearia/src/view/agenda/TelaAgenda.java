@@ -6,6 +6,7 @@
 package view.agenda;
 
 import java.awt.Frame;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import model.dao.AgendamentoDAO;
@@ -62,6 +63,15 @@ public class TelaAgenda extends javax.swing.JFrame {
                        
             });
         });
+//        ProdutoAgendamentoDAO padao = new ProdutoAgendamentoDAO();
+//        padao.read().forEach((s) -> {
+//            modelo.addRow(new Object[]{
+//   
+//                
+//                
+//                       
+//            });
+//        });
         
     }
     
@@ -185,6 +195,10 @@ public class TelaAgenda extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(3).setHeaderValue("Produto(s)");
+            jTable1.getColumnModel().getColumn(4).setHeaderValue("Valor total");
+        }
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
