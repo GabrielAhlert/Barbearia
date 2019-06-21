@@ -31,3 +31,13 @@ CREATE TABLE agendamento(
 	CONSTRAINT fk_cliente FOREIGN KEY (cod_cliente) REFERENCES cliente (codigo)
 
 )
+
+CREATE TABLE produto_agendamento(
+	cod_produto INTEGER NOT NULL,
+	cod_agendamento TIMESTAMP NOT NULL,
+	quantidade INTEGER NOT NULL,
+	CONSTRAINT pk_produto_agendamento PRIMARY KEY (cod_produto, cod_agendamento),
+	CONSTRAINT fk_produto_agendamento1 FOREIGN KEY (cod_produto) REFERENCES produto (codigo),
+	CONSTRAINT fk_produto_agendamento2 FOREIGN KEY (cod_agendamento) REFERENCES agendamento (data_hora)
+
+)
