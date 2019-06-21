@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import model.dao.AgendamentoDAO;
 import model.dao.ClienteDAO;
+import model.dao.ProdutoAgendamentoDAO;
 import view.agendamento.AdicionarAgendamento;
 import view.agendamento.RemoverAgendamento;
 import view.cliente.TelaCliente;
@@ -61,6 +62,7 @@ public class TelaAgenda extends javax.swing.JFrame {
                        
             });
         });
+        
     }
     
     /**

@@ -224,7 +224,7 @@ public class AdicionarProdutoAgendado extends javax.swing.JFrame {
        
        pa.setQuantidades(Integer.parseInt(jComboBox3.getSelectedItem().toString()));
        
-       JOptionPane.showMessageDialog(this, pa.getQuantidades()); 
+//       JOptionPane.showMessageDialog(this, pa.getQuantidades()); 
        
        boolean resultado = padao.inserirProdutoAgendamento(pa);
        

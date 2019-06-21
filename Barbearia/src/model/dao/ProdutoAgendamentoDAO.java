@@ -8,6 +8,7 @@ package model.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -57,6 +58,57 @@ public class ProdutoAgendamentoDAO {
             System.out.println(ex.getMessage());
             return false;
         }
+    }
+        public List<ProdutoAgendamento> readP(Timestamp t) {
+          
+        List<ProdutoAgendamento>  resultados = new ArrayList<>();  
+        String sql = "SELECT nome_produto, preco, cod_produto, cod_agendamento, quantidade FROM produto_agendamento pa " +
+                     "JOIN produto ON produto.codigo = pa.cod_produto " +
+                      "JOIN agendamento ON agendamento.data_hora = pa.cod_agendamento WHERE cod_agendamento = '"+t+"'";
+        PreparedStatement ps;
+        ResultSet rs;
+        
+        try {
+            ps = conexao.Conexao.getConexao().prepareStatement(sql);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                
+                Agendamento a = new Agendamento();
+                Produto p = new Produto();
+                ProdutoAgendamento pa = new ProdutoAgendamento();
+               
+                p.setCodigo(rs.getInt("cod_produto"));
+                p.setPreco(rs.getDouble("preco"));
+                p.setNome(rs.getString("nome_produto"));
+                
+                a.setDataH(rs.getTimestamp("cod_agendamento"));
+                
+                pa.setAgendamento(a);
+                pa.setProduto(p);
+                pa.setQuantidades(rs.getInt("quantidade"));
+//                c.setNome(rs.getString("nome"));
+//                c.setCodigo(rs.getInt("cod_cliente"));
+//                s.setNome(rs.getString("nome_servico"));
+//                s.setCodigo(rs.getInt("cod_servico"));
+//                a.setServico(s);
+//                a.setCliente(c);
+//                a.setDataH(rs.getTimestamp("data_hora"));
+//                
+
+                resultados.add(pa);
+                
+            }
+            rs.close();
+            ps.close();
+            Collections.sort(resultados);
+            return resultados;
+            
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ServicoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        
     }
     
     public List<ProdutoAgendamento> read() {
@@ -112,5 +164,19 @@ public class ProdutoAgendamentoDAO {
         
     }
     
+       public boolean excluirProdutoAgendamento(ProdutoAgendamento pa) {
+        String sql = "DELETE FROM produto_agendamento WHERE cod_agendamento = ? AND cod_produto = ?";//"sintax padrão do SQL"
+        try {
+            PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);
+            ps.setTimestamp(1, pa.getAgendamento().getDataH());
+            ps.setInt(2, pa.getProduto().getCodigo());
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    
+       }
     
 }

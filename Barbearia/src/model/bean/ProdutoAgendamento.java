@@ -5,6 +5,9 @@
  */
 package model.bean;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  *
  * @author Vera
@@ -43,6 +46,18 @@ public class ProdutoAgendamento implements Comparable{
     public int compareTo(Object o) {
         ProdutoAgendamento pa = (ProdutoAgendamento) o;
         return this.getAgendamento().getDataH().compareTo(pa.getAgendamento().getDataH());
+    }
+    public double getValorTotal(){
+        return this.quantidades * this.produto.getPreco();
+    }
+    
+    public String toString() {
+        Date d =  new Date();
+        SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sd1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");//formato do banco ano mes dia
+        d = this.agendamento.getDataH();
+       
+        return "("+this.quantidades+"x) "+this.produto.getNome()+" "+String.valueOf(sd1.format(d)) ;
     }
     
 }
