@@ -110,7 +110,57 @@ public class ProdutoAgendamentoDAO {
         }
         
     }
-    
+     public List<ProdutoAgendamento> readP(String t) {
+          
+        List<ProdutoAgendamento>  resultados = new ArrayList<>();  
+        String sql = "SELECT nome_produto, preco, cod_produto, cod_agendamento, quantidade FROM produto_agendamento pa " +
+                     "JOIN produto ON produto.codigo = pa.cod_produto " +
+                      "JOIN agendamento ON agendamento.data_hora = pa.cod_agendamento WHERE cod_agendamento = '"+t+"' AND quantidade > 0";
+        PreparedStatement ps;
+        ResultSet rs;
+        
+        try {
+            ps = conexao.Conexao.getConexao().prepareStatement(sql);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                
+                Agendamento a = new Agendamento();
+                Produto p = new Produto();
+                ProdutoAgendamento pa = new ProdutoAgendamento();
+               
+                p.setCodigo(rs.getInt("cod_produto"));
+                p.setPreco(rs.getDouble("preco"));
+                p.setNome(rs.getString("nome_produto"));
+                
+                a.setDataH(rs.getTimestamp("cod_agendamento"));
+                
+                pa.setAgendamento(a);
+                pa.setProduto(p);
+                pa.setQuantidades(rs.getInt("quantidade"));
+//                c.setNome(rs.getString("nome"));
+//                c.setCodigo(rs.getInt("cod_cliente"));
+//                s.setNome(rs.getString("nome_servico"));
+//                s.setCodigo(rs.getInt("cod_servico"));
+//                a.setServico(s);
+//                a.setCliente(c);
+//                a.setDataH(rs.getTimestamp("data_hora"));
+//                
+
+                resultados.add(pa);
+                
+            }
+            rs.close();
+            ps.close();
+            Collections.sort(resultados);
+            return resultados;
+            
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ServicoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        
+    }
     public List<ProdutoAgendamento> read() {
           
         List<ProdutoAgendamento>  resultados = new ArrayList<>();  

@@ -6,9 +6,18 @@
 package view.agenda;
 
 import java.awt.Frame;
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.bean.Agendamento;
 import model.dao.AgendamentoDAO;
 import model.dao.ClienteDAO;
 import model.dao.ProdutoAgendamentoDAO;
@@ -33,11 +42,18 @@ public class TelaAgenda extends javax.swing.JFrame {
     public TelaAgenda() {
         initComponents();
         this.setExtendedState(0);
-      
+         
     }
     
     public void limpaTabela(){
         DefaultTableModel tblRemove = (DefaultTableModel)jTable1.getModel();
+       
+        while(tblRemove.getRowCount() > 0){
+            tblRemove.removeRow(0);
+        }
+    }
+    public void limpaTabela1(){
+        DefaultTableModel tblRemove = (DefaultTableModel)jTable2.getModel();
        
         while(tblRemove.getRowCount() > 0){
             tblRemove.removeRow(0);
@@ -48,9 +64,28 @@ public class TelaAgenda extends javax.swing.JFrame {
     public void revalidate() {
         mostra(); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    public void mostraProduto(String pa){
+        
+        limpaTabela1();
+        DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
+        ProdutoAgendamentoDAO padao = new ProdutoAgendamentoDAO();
+        padao.readP(pa).forEach((s) -> {
+            modelo.addRow(new Object[]{
+   
+                s.getProduto().getNome(),
+                s.getQuantidades(),
+                s.getProduto().getPreco(),
+                s.getValorTotal()
+                
+                       
+            });
+        });
+    }
 
         void mostra(){
         limpaTabela();
+        limpaTabela1();
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         AgendamentoDAO adao = new AgendamentoDAO();
         adao.read().forEach((s) -> {
@@ -63,6 +98,10 @@ public class TelaAgenda extends javax.swing.JFrame {
                        
             });
         });
+         jTable1.changeSelection(0, jTable1.getColumnCount(), false, false);
+         String pa = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
+            mostraProduto(pa);
+         
 //        ProdutoAgendamentoDAO padao = new ProdutoAgendamentoDAO();
 //        padao.read().forEach((s) -> {
 //            modelo.addRow(new Object[]{
@@ -101,6 +140,8 @@ public class TelaAgenda extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -186,19 +227,56 @@ public class TelaAgenda extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Data/hora", "Nome", "Servico", "Produto(s)", "Valor total"
+                "Data/hora", "Nome", "Servico"
             }
         ));
+        jTable1.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                jTable1HierarchyChanged(evt);
+            }
+        });
         jTable1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTable1FocusGained(evt);
             }
         });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jTable1.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                jTable1ComponentHidden(evt);
+            }
+            public void componentMoved(java.awt.event.ComponentEvent evt) {
+                jTable1ComponentMoved(evt);
+            }
+        });
+        jTable1.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+                jTable1CaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
+        });
+        jTable1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jTable1PropertyChange(evt);
+            }
+        });
+        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTable1KeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTable1KeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTable1KeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(3).setHeaderValue("Produto(s)");
-            jTable1.getColumnModel().getColumn(4).setHeaderValue("Valor total");
-        }
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -209,8 +287,8 @@ public class TelaAgenda extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 74, Short.MAX_VALUE))
         );
 
         jPanel4.setBackground(new java.awt.Color(153, 153, 153));
@@ -335,17 +413,29 @@ public class TelaAgenda extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Produto", "Quantidade", "Valor unidade", "Valor total"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane2)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 93, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -464,6 +554,48 @@ public class TelaAgenda extends javax.swing.JFrame {
         this.revalidate();
     }//GEN-LAST:event_jTable1FocusGained
 
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        String pa = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
+        mostraProduto(pa);
+        
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jTable1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTable1PropertyChange
+        
+        
+    }//GEN-LAST:event_jTable1PropertyChange
+
+    private void jTable1ComponentMoved(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jTable1ComponentMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1ComponentMoved
+
+    private void jTable1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyPressed
+        String pa = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
+        mostraProduto(pa);          
+    }//GEN-LAST:event_jTable1KeyPressed
+
+    private void jTable1HierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_jTable1HierarchyChanged
+      
+    }//GEN-LAST:event_jTable1HierarchyChanged
+
+    private void jTable1ComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jTable1ComponentHidden
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1ComponentHidden
+
+    private void jTable1CaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTable1CaretPositionChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1CaretPositionChanged
+
+    private void jTable1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyTyped
+        String pa = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
+        mostraProduto(pa);  
+    }//GEN-LAST:event_jTable1KeyTyped
+
+    private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
+       String pa = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
+        mostraProduto(pa);  
+    }//GEN-LAST:event_jTable1KeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -517,6 +649,8 @@ public class TelaAgenda extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
 }

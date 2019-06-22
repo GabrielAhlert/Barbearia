@@ -98,7 +98,7 @@ public class AdicionarProdutoAgendado extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setText("Adicionar Produto ao Agendamento");
+        jLabel1.setText("Gerenciar Produto ao Agendamento");
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icons8-calendário-50_1.png"))); // NOI18N
 
