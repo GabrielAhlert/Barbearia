@@ -42,6 +42,7 @@ public class TelaAgenda extends javax.swing.JFrame {
     public TelaAgenda() {
         initComponents();
         this.setExtendedState(0);
+        this.setExtendedState(MAXIMIZED_BOTH);  
          
     }
     
@@ -65,7 +66,7 @@ public class TelaAgenda extends javax.swing.JFrame {
         mostra(); //To change body of generated methods, choose Tools | Templates.
     }
     
-    public void mostraProduto(String pa){
+    public double mostraProduto(String pa){
         
         limpaTabela1();
         DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
@@ -76,11 +77,19 @@ public class TelaAgenda extends javax.swing.JFrame {
                 s.getProduto().getNome(),
                 s.getQuantidades(),
                 s.getProduto().getPreco(),
-                s.getValorTotal()
+                s.getValorTotal(),
+              //  s.getAgendamento().getServico().getPreco() + s.getValorTotal()
                 
                        
             });
         });
+        double count=0;
+        for (int i=0; i<=jTable2.getRowCount()-1;i++) {
+        count+=Double.parseDouble(jTable2.getValueAt(i, 3).toString());
+        //jTable1.a
+        }
+       // JOptionPane.showMessageDialog(this, count);
+       return count;
     }
 
         void mostra(){
@@ -93,15 +102,16 @@ public class TelaAgenda extends javax.swing.JFrame {
    
                 s.toString(),
                 s.getCliente().getNome(),
-                s.getServico().getNome()
+                s.getServico().getNome(),
+                s.getServico().getPreco(),
+                this.mostraProduto(s.toString()) + s.getServico().getPreco()
                 
                        
             });
         });
          jTable1.changeSelection(0, jTable1.getColumnCount(), false, false);
          String pa = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
-            mostraProduto(pa);
-         
+         mostraProduto(pa);
 //        ProdutoAgendamentoDAO padao = new ProdutoAgendamentoDAO();
 //        padao.read().forEach((s) -> {
 //            modelo.addRow(new Object[]{
@@ -222,14 +232,25 @@ public class TelaAgenda extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
+        jTable1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Data/hora", "Nome", "Servico"
+                "Data/hora", "Cliente", "Servico", "Valor serviço", "Valor Total (servico + produto)"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.setRowHeight(25);
+        jTable1.setRowMargin(5);
         jTable1.addHierarchyListener(new java.awt.event.HierarchyListener() {
             public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
                 jTable1HierarchyChanged(evt);
@@ -418,7 +439,7 @@ public class TelaAgenda extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Produto", "Quantidade", "Valor unidade", "Valor total"
+                "Produto", "Quantidade", "Preço por unidade", "Valor Produtos"
             }
         ));
         jScrollPane2.setViewportView(jTable2);

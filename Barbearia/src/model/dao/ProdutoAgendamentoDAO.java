@@ -62,9 +62,11 @@ public class ProdutoAgendamentoDAO {
         public List<ProdutoAgendamento> readP(Timestamp t) {
           
         List<ProdutoAgendamento>  resultados = new ArrayList<>();  
-        String sql = "SELECT nome_produto, preco, cod_produto, cod_agendamento, quantidade FROM produto_agendamento pa " +
+        String sql = "SELECT nome_produto, produto.preco AS precop, servico.preco AS precos, cod_produto, cod_agendamento,cod_servico ,quantidade FROM produto_agendamento pa " +
                      "JOIN produto ON produto.codigo = pa.cod_produto " +
-                      "JOIN agendamento ON agendamento.data_hora = pa.cod_agendamento WHERE cod_agendamento = '"+t+"' AND quantidade > 0";
+                      "JOIN agendamento ON agendamento.data_hora = pa.cod_agendamento "
+                     +"JOIN servico ON servico.codigo = agendamento.cod_servico"
+                    + " WHERE cod_agendamento = '"+t+"' AND quantidade > 0";
         PreparedStatement ps;
         ResultSet rs;
         
@@ -77,9 +79,12 @@ public class ProdutoAgendamentoDAO {
                 Agendamento a = new Agendamento();
                 Produto p = new Produto();
                 ProdutoAgendamento pa = new ProdutoAgendamento();
-               
+                Servico s = new Servico();
+                
+                s.setPreco(rs.getDouble("precos"));
+                a.setServico(s);
                 p.setCodigo(rs.getInt("cod_produto"));
-                p.setPreco(rs.getDouble("preco"));
+                p.setPreco(rs.getDouble("precop"));
                 p.setNome(rs.getString("nome_produto"));
                 
                 a.setDataH(rs.getTimestamp("cod_agendamento"));
@@ -112,10 +117,12 @@ public class ProdutoAgendamentoDAO {
     }
      public List<ProdutoAgendamento> readP(String t) {
           
-        List<ProdutoAgendamento>  resultados = new ArrayList<>();  
-        String sql = "SELECT nome_produto, preco, cod_produto, cod_agendamento, quantidade FROM produto_agendamento pa " +
+               List<ProdutoAgendamento>  resultados = new ArrayList<>();  
+        String sql = "SELECT nome_produto, produto.preco AS precop, servico.preco AS precos, cod_produto, cod_agendamento,cod_servico ,quantidade FROM produto_agendamento pa " +
                      "JOIN produto ON produto.codigo = pa.cod_produto " +
-                      "JOIN agendamento ON agendamento.data_hora = pa.cod_agendamento WHERE cod_agendamento = '"+t+"' AND quantidade > 0";
+                      "JOIN agendamento ON agendamento.data_hora = pa.cod_agendamento "
+                     +"JOIN servico ON servico.codigo = agendamento.cod_servico"
+                    + " WHERE cod_agendamento = '"+t+"' AND quantidade > 0";
         PreparedStatement ps;
         ResultSet rs;
         
@@ -128,9 +135,12 @@ public class ProdutoAgendamentoDAO {
                 Agendamento a = new Agendamento();
                 Produto p = new Produto();
                 ProdutoAgendamento pa = new ProdutoAgendamento();
-               
+                Servico s = new Servico();
+                
+                s.setPreco(rs.getDouble("precos"));
+                a.setServico(s);
                 p.setCodigo(rs.getInt("cod_produto"));
-                p.setPreco(rs.getDouble("preco"));
+                p.setPreco(rs.getDouble("precop"));
                 p.setNome(rs.getString("nome_produto"));
                 
                 a.setDataH(rs.getTimestamp("cod_agendamento"));

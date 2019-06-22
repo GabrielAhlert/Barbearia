@@ -32,7 +32,7 @@ public class AgendamentoDAO {
         
             //ps.setTimestamp(1, Timestamp.valueOf(a.getDataHora()));
             
-            ps.setDouble(1, a.getValorTotal());
+            ps.setDouble(1, a.getServico().getPreco());
             ps.setInt(2, a.getCliente().getCodigo());
             ps.setInt(3, a.getServico().getCodigo());
             //ps.setString(1, c.getNome());
@@ -68,6 +68,7 @@ public class AgendamentoDAO {
                 c.setCodigo(rs.getInt("cod_cliente"));
                 s.setNome(rs.getString("nome_servico"));
                 s.setCodigo(rs.getInt("cod_servico"));
+                s.setPreco(rs.getDouble("preco"));
                 a.setServico(s);
                 a.setCliente(c);
                 a.setDataH(rs.getTimestamp("data_hora"));

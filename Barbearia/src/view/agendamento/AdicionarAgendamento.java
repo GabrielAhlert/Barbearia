@@ -282,7 +282,7 @@ public class AdicionarAgendamento extends javax.swing.JFrame {
             Date dd = new Date(System.currentTimeMillis());
             
 //            int i = da.compareTo(dd);
-//            JOptionPane.showMessageDialog(this, i);
+         JOptionPane.showMessageDialog(this, sd1.format(da));
             
             a.setData(sd1.format(da));
         } catch (ParseException ex) {
