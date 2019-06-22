@@ -238,7 +238,7 @@ public class TelaAgenda extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Data/hora", "Cliente", "Servico", "Valor serviço", "Valor Total (servico + produto)"
+                "Data/hora", "Cliente", "Servico", "Valor serviço", "Valor Total (servico + produto(s))"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -434,14 +434,16 @@ public class TelaAgenda extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jTable2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Produto", "Quantidade", "Preço por unidade", "Valor Produtos"
+                "Produto", "Quantidade", "Preço por unidade", "Valor total"
             }
         ));
+        jTable2.setRowHeight(25);
         jScrollPane2.setViewportView(jTable2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

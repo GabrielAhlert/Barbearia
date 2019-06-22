@@ -11,6 +11,7 @@ import model.bean.Cliente;
 import model.bean.Servico;
 import model.dao.AgendamentoDAO;
 import model.dao.ClienteDAO;
+import model.dao.ProdutoAgendamentoDAO;
 import model.dao.ServicoDAO;
 import view.agenda.TelaAgenda;
 
@@ -175,11 +176,14 @@ public class RemoverAgendamento extends javax.swing.JFrame {
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
       Agendamento a = (Agendamento) jComboBox1.getSelectedItem();
         AgendamentoDAO adao = new AgendamentoDAO();
+        ProdutoAgendamentoDAO padao = new ProdutoAgendamentoDAO();
+        
         boolean resultado = adao.excluirAgendamento(a);
-        if (resultado){
+        boolean resultado1 = padao.excluirProdutoAgendamento(a.getDataH());
+        if (resultado && resultado1){
             JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
             TelaAgenda frame = new TelaAgenda();
-            frame.revalidate();
+            //frame.revalidate();
             this.dispose();
         }else{
             JOptionPane.showMessageDialog(this, "Exclusão não efetuada","ERRO",2);

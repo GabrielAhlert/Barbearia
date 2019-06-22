@@ -229,14 +229,25 @@ public class ProdutoAgendamentoDAO {
         
     }
     
-    
-    
-       public boolean excluirProdutoAgendamento(ProdutoAgendamento pa) {
-        String sql = "DELETE FROM produto_agendamento WHERE cod_agendamento = ? AND cod_produto = ?";//"sintax padrão do SQL"
+    public boolean excluirProdutoAgendamento(Timestamp a) {
+        String sql = "DELETE FROM produto_agendamento WHERE cod_agendamento = '"+a+"'";//"sintax padrão do SQL"
         try {
             PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);
-            ps.setTimestamp(1, pa.getAgendamento().getDataH());
-            ps.setInt(2, pa.getProduto().getCodigo());
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    
+       }
+    
+       public boolean excluirProdutoAgendamentoE(ProdutoAgendamento pa) {
+        String sql = "DELETE FROM produto_agendamento WHERE cod_agendamento = '"+pa.getAgendamento().getDataH()+"' AND cod_produto = ?";//"sintax padrão do SQL"
+        try {
+            PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);
+           // ps.setTimestamp(1, pa.getAgendamento().getDataH());
+            ps.setInt(1, pa.getProduto().getCodigo());
             ps.executeUpdate();
             return true;
         } catch (SQLException | ClassNotFoundException ex) {

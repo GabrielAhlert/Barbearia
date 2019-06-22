@@ -135,6 +135,7 @@ public class AdicionarProdutoAgendado extends javax.swing.JFrame {
         });
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" }));
+        jComboBox3.setSelectedIndex(1);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -252,9 +253,16 @@ public class AdicionarProdutoAgendado extends javax.swing.JFrame {
        pa.setProduto(p);
        
        pa.setQuantidades(Integer.parseInt(jComboBox3.getSelectedItem().toString()));
-       
-//       JOptionPane.showMessageDialog(this, pa.getQuantidades()); 
-       
+       if(Integer.parseInt(jComboBox3.getSelectedItem().toString()) == 0){
+           boolean resultado2 = padao.excluirProdutoAgendamentoE(pa);
+           if(resultado2){
+           JOptionPane.showMessageDialog(this, pa.getProduto().getNome()+" Removido"); 
+           this.preenche();
+       }else{
+               JOptionPane.showMessageDialog(this, "Erro ao remover produto"); 
+           }
+       }else{
+           
        boolean resultado = padao.inserirProdutoAgendamento(pa);
        
        if(resultado){
@@ -269,6 +277,9 @@ public class AdicionarProdutoAgendado extends javax.swing.JFrame {
              JOptionPane.showMessageDialog(this, "fatal error kk");     
            }
        }
+           
+       }
+//       JOptionPane.showMessageDialog(this, pa.getQuantidades()); 
        
     }//GEN-LAST:event_jLabel7MouseClicked
 
