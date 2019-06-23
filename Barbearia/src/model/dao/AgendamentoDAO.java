@@ -9,8 +9,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -47,11 +49,14 @@ public class AgendamentoDAO {
     }
     
     public List<Agendamento> read() {
-          
+        SimpleDateFormat sd = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        Date dataAtual = new Date(System.currentTimeMillis());
+        String data = sd.format(dataAtual);  
+        
         List<Agendamento>  resultados = new ArrayList<>();  
         String sql = "SELECT data_hora, valor_total, cod_servico, " +
                     "cod_cliente, nome, preco, nome_servico FROM agendamento JOIN cliente ON cliente.codigo = agendamento.cod_cliente " +
-                    "JOIN servico ON servico.codigo = cod_servico";
+                    "JOIN servico ON servico.codigo = cod_servico WHERE data_hora >= '"+data+"'";
         PreparedStatement ps;
         ResultSet rs;
         
