@@ -47,18 +47,18 @@ public class TelaHistorico extends javax.swing.JFrame {
     }
     
     public void limpaTabela(){
-//        DefaultTableModel tblRemove = (DefaultTableModel)jTable1.getModel();
-//       
-//        while(tblRemove.getRowCount() > 0){
-//            tblRemove.removeRow(0);
-//        }
+        DefaultTableModel tblRemove = (DefaultTableModel)jTable1.getModel();
+       
+        while(tblRemove.getRowCount() > 0){
+            tblRemove.removeRow(0);
+        }
     }
     public void limpaTabela1(){
-//        DefaultTableModel tblRemove = (DefaultTableModel)jTable2.getModel();
-//       
-//        while(tblRemove.getRowCount() > 0){
-//            tblRemove.removeRow(0);
-//        }
+        DefaultTableModel tblRemove = (DefaultTableModel)jTable2.getModel();
+       
+        while(tblRemove.getRowCount() > 0){
+            tblRemove.removeRow(0);
+        }
     }
     
     @Override
@@ -66,31 +66,31 @@ public class TelaHistorico extends javax.swing.JFrame {
     //    mostra(); //To change body of generated methods, choose Tools | Templates.
     }
     
-  //  public double mostraProduto(String pa){
+    public double mostraProduto(String pa){
         
-//        limpaTabela1();
-//        DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
-//        ProdutoAgendamentoDAO padao = new ProdutoAgendamentoDAO();
-//        padao.readP(pa).forEach((s) -> {
-//            modelo.addRow(new Object[]{
-//   
-//                s.getProduto().getNome(),
-//                s.getQuantidades(),
-//                s.getProduto().getPreco(),
-//                s.getValorTotal(),
-//              //  s.getAgendamento().getServico().getPreco() + s.getValorTotal()
-//                
-//                       
-//            });
-//        });
-//        double count=0;
-//        for (int i=0; i<=jTable2.getRowCount()-1;i++) {
-//        count+=Double.parseDouble(jTable2.getValueAt(i, 3).toString());
-//        //jTable1.a
-//        }
-//       // JOptionPane.showMessageDialog(this, count);
-//       return count;
-//    }
+        limpaTabela1();
+        DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
+        ProdutoAgendamentoDAO padao = new ProdutoAgendamentoDAO();
+        padao.readP(pa).forEach((s) -> {
+            modelo.addRow(new Object[]{
+   
+                s.getProduto().getNome(),
+                s.getQuantidades(),
+                s.getProduto().getPreco(),
+                s.getValorTotal(),
+              //  s.getAgendamento().getServico().getPreco() + s.getValorTotal()
+                
+                       
+            });
+        });
+        double count=0;
+        for (int i=0; i<=jTable2.getRowCount()-1;i++) {
+        count+=Double.parseDouble(jTable2.getValueAt(i, 3).toString());
+        //jTable1.a
+        }
+       // JOptionPane.showMessageDialog(this, count);
+       return count;
+    }
 //
 //        void mostra(){
 //        limpaTabela();
@@ -310,7 +310,6 @@ public class TelaHistorico extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField2.setText("");
         jFormattedTextField2.setToolTipText("");
         jFormattedTextField2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jFormattedTextField2.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -380,7 +379,7 @@ public class TelaHistorico extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -389,9 +388,9 @@ public class TelaHistorico extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(8, 8, 8)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jFormattedTextField3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -464,8 +463,8 @@ public class TelaHistorico extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1FocusGained
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-//        String pa = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
-//        mostraProduto(pa);
+        String pa = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
+        mostraProduto(pa);
 
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -486,18 +485,18 @@ public class TelaHistorico extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1PropertyChange
 
     private void jTable1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyPressed
-//        String pa = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
-//        mostraProduto(pa);
+        String pa = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
+        mostraProduto(pa);
     }//GEN-LAST:event_jTable1KeyPressed
 
     private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
-//        String pa = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
-//        mostraProduto(pa);
+        String pa = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
+        mostraProduto(pa);
     }//GEN-LAST:event_jTable1KeyReleased
 
     private void jTable1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyTyped
-//        String pa = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
-//        mostraProduto(pa);
+        String pa = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
+        mostraProduto(pa);
     }//GEN-LAST:event_jTable1KeyTyped
 
     private void jFormattedTextField2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFormattedTextField2FocusGained
@@ -505,7 +504,7 @@ public class TelaHistorico extends javax.swing.JFrame {
     }//GEN-LAST:event_jFormattedTextField2FocusGained
 
     private void jFormattedTextField2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFormattedTextField2FocusLost
-            this.dispose();
+           // this.dispose();
     }//GEN-LAST:event_jFormattedTextField2FocusLost
 
     private void jFormattedTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField2ActionPerformed
@@ -525,10 +524,55 @@ public class TelaHistorico extends javax.swing.JFrame {
     }//GEN-LAST:event_jFormattedTextField3ActionPerformed
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
-
-
+            String dataInicio = jFormattedTextField2.getText();
+            String dataFim = jFormattedTextField3.getText();
+            SimpleDateFormat sd1 = new SimpleDateFormat("yyyy/MM/dd");
+            SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
+            
+         try {
+             java.util.Date dai = sd.parse(dataInicio);
+             java.util.Date daf = sd.parse(dataFim);
+             dataInicio = sd1.format(dai);
+             dataFim = sd1.format(daf);
+             mostra(dataInicio, dataFim);
+         } catch (ParseException ex) {
+             Logger.getLogger(TelaHistorico.class.getName()).log(Level.SEVERE, null, ex);
+         }
+                
     }//GEN-LAST:event_jLabel7MouseClicked
 
+    void mostra(String t, String t1){
+        limpaTabela();
+        limpaTabela1();
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        AgendamentoDAO adao = new AgendamentoDAO();
+        adao.readSelec(t, t1).forEach((s) -> {
+            modelo.addRow(new Object[]{
+   
+                s.toString(),
+                s.getCliente().getNome(),
+                s.getServico().getNome(),
+                s.getServico().getPreco(),
+                this.mostraProduto(s.toString()) + s.getServico().getPreco()
+                
+                       
+            });
+        });
+         jTable1.changeSelection(0, jTable1.getColumnCount(), false, false);
+         String pa = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
+         mostraProduto(pa);
+//        ProdutoAgendamentoDAO padao = new ProdutoAgendamentoDAO();
+//        padao.read().forEach((s) -> {
+//            modelo.addRow(new Object[]{
+//   
+//                
+//                
+//                       
+//            });
+//        });
+        
+    }
+    
     /**
      * @param args the command line arguments
      */

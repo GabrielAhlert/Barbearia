@@ -96,6 +96,56 @@ public class AgendamentoDAO {
         
     }
     
+    public List<Agendamento> readSelec(String t, String t1) {
+          
+        List<Agendamento>  resultados = new ArrayList<>();  
+        String sql = "SELECT data_hora, valor_total, cod_servico, " +
+                    "cod_cliente, nome, preco, nome_servico FROM agendamento JOIN cliente ON cliente.codigo = agendamento.cod_cliente " +
+                    "JOIN servico ON servico.codigo = cod_servico WHERE data_hora BETWEEN '"+t+" 00:00' AND '"+t1+" 23:59'";
+        PreparedStatement ps;
+        ResultSet rs;
+        
+        try {
+            ps = conexao.Conexao.getConexao().prepareStatement(sql);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                
+                Agendamento a = new Agendamento();
+                Servico s = new Servico();
+                Cliente c = new Cliente();
+                c.setNome(rs.getString("nome"));
+                c.setCodigo(rs.getInt("cod_cliente"));
+                s.setNome(rs.getString("nome_servico"));
+                s.setCodigo(rs.getInt("cod_servico"));
+                s.setPreco(rs.getDouble("preco"));
+                a.setServico(s);
+                a.setCliente(c);
+                a.setDataH(rs.getTimestamp("data_hora"));
+                
+//                //nome da tabela do banco de dados
+//                a.setDataH(rs.getString("data_hora"));
+//               
+////                c.setCodigo(rs.getInt("codigo"));
+////                c.setNome(rs.getString("nome"));
+////                c.setCelular(rs.getString("telefone"));
+////                c.setEmail(rs.getString("email"));
+                resultados.add(a);
+                
+            }
+            rs.close();
+            ps.close();
+            Collections.sort(resultados);
+            return resultados;
+            
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ServicoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+       
+        
+    }
+    
     public boolean excluirAgendamento(Agendamento c) {
         String sql = "DELETE FROM agendamento WHERE data_hora = ?";//"sintax padrão do SQL"
         try {
