@@ -28,7 +28,7 @@ CREATE TABLE agendamento(
 	cod_cliente INTEGER NOT NULL,
 	CONSTRAINT pk_agendamento PRIMARY KEY (data_hora),
 	CONSTRAINT fk_servico FOREIGN KEY (cod_servico) REFERENCES servico (codigo),
-	CONSTRAINT fk_cliente FOREIGN KEY (cod_cliente) REFERENCES cliente (codigo)
+	CONSTRAINT fk_cliente FOREIGN KEY (cod_cliente) REFERENCES cliente (codigo) ON DELETE CASCADE
 
 )
 
