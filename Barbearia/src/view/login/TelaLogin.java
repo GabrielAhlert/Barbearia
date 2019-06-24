@@ -185,14 +185,13 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
 
-//        if(jLogin.getText().equals("a")&& new String(jSenha.getPassword()).equals("a")){
-//            
-//            this.dispose();
-//            new TelaAgenda().setVisible(true);
-//        }
-//        else{
-//            this.dispose();
-//        }
+                if(check()){
+                this.dispose();
+                new TelaAgenda().setVisible(true);
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Senha incorreta!");
+            }
     }//GEN-LAST:event_jLabel6MouseClicked
     public void atualizaComb(){
         jComboBox1.removeAllItems();

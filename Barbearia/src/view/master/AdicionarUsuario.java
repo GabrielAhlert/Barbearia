@@ -210,7 +210,15 @@ public class AdicionarUsuario extends javax.swing.JFrame {
     public boolean check(){
         if(jTNome.getText().toString().isEmpty() || jTLogin.getText().toString().isEmpty() || jPSenha.getText().toString().isEmpty()){
             return false;
+        }else {
+        UsuarioDAO udao = new UsuarioDAO();
+        String a;
+        a = udao.readCadas(jTLogin.getText());
+        if(a.equals(jTLogin.getText())){
+            return false;
         }
+        }
+        
         return true;
     }
     

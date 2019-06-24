@@ -58,7 +58,7 @@ public class UsuarioDAO {
                 resultados.add(u);
                 
             }
-            //Collections.sort(resultados);
+            Collections.sort(resultados);
             return resultados;
             
         } catch (SQLException | ClassNotFoundException ex) {
@@ -89,8 +89,45 @@ public class UsuarioDAO {
                 resultados.add(u);
                 
             }
-            //Collections.sort(resultados);
+         //   Collections.sort(resultados);
             String a = resultados.get(0).getSenha();
+            return a;
+            
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ServicoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+       
+        
+    }
+         public String readCadas(String us) {
+          
+        List<Usuario>  resultados = new ArrayList<>();  
+        String sql = "SELECT login FROM usuario WHERE login = ?";
+        PreparedStatement ps;
+        ResultSet rs;
+        
+        try {
+            ps = conexao.Conexao.getConexao().prepareStatement(sql);
+            ps.setString(1, us);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                
+                Usuario u = new Usuario();
+                //nome da tabela do banco de dados
+                u.setSenha(rs.getString("login"));
+                resultados.add(u);
+                
+            }
+            String a;
+            //Collections.sort(resultados);
+            if(resultados.size() == 0){
+                a = "";
+            }
+            else{
+              a = resultados.get(0).getSenha();
+            }
             return a;
             
         } catch (SQLException | ClassNotFoundException ex) {
