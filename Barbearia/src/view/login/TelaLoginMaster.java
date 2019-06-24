@@ -147,7 +147,7 @@ public class TelaLoginMaster extends javax.swing.JFrame {
 
     private void jSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jSenhaKeyPressed
         if(evt.getKeyCode() == 10){
-            if(new String(jSenha.getPassword()).equals("13901390")){
+            if(new String(jSenha.getPassword()).equals("123")){
         
         TelaMaster a = new TelaMaster();
             a.setAlwaysOnTop (true);
@@ -162,7 +162,7 @@ public class TelaLoginMaster extends javax.swing.JFrame {
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
 
-            if(new String(jSenha.getPassword()).equals("13901390")){
+            if(new String(jSenha.getPassword()).equals("123")){
         
         TelaMaster a = new TelaMaster();
             a.setAlwaysOnTop (true);

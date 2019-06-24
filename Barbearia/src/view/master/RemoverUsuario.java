@@ -5,6 +5,9 @@
  */
 package view.master;
 
+import javax.swing.JOptionPane;
+import model.bean.Usuario;
+import model.dao.UsuarioDAO;
 import view.cliente.*;
 
 /**
@@ -18,6 +21,10 @@ public class RemoverUsuario extends javax.swing.JFrame {
      */
     public RemoverUsuario() {
         initComponents();
+           UsuarioDAO cdao = new UsuarioDAO();
+        for(Usuario c: cdao.read()){
+           jComboBox2.addItem(c);
+        }
     }
 
     /**
@@ -63,12 +70,16 @@ public class RemoverUsuario extends javax.swing.JFrame {
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icons8-divisa-circulada-à-direita-50.png"))); // NOI18N
         jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Login:");
 
         jComboBox2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -130,8 +141,20 @@ public class RemoverUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
-        this.dispose();        // TODO add your handling code here:
+    //    this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_formWindowLostFocus
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+       Usuario u = (Usuario) jComboBox2.getSelectedItem();
+       UsuarioDAO udao = new UsuarioDAO();
+       boolean resultado = udao.excluirUsuario(u);
+       if(resultado){
+           JOptionPane.showMessageDialog(this, "Usuario removido com sucesso!");
+               this.dispose();
+       }else{
+           JOptionPane.showMessageDialog(this, "Erro ao remover usuario!");
+       }
+    }//GEN-LAST:event_jLabel6MouseClicked
 
     /**
      * @param args the command line arguments
@@ -176,7 +199,7 @@ public class RemoverUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<Object> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

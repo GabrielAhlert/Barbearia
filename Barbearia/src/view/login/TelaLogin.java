@@ -7,6 +7,9 @@ package view.login;
 
 import java.awt.Frame;
 import java.util.Arrays;
+import javax.swing.JOptionPane;
+import model.bean.Usuario;
+import model.dao.UsuarioDAO;
 import view.agenda.TelaAgenda;
 
 /**
@@ -21,6 +24,7 @@ public class TelaLogin extends javax.swing.JFrame {
      */
     public TelaLogin() {
         initComponents();
+      //  this.atualizaComb();
     }
 
     /**
@@ -39,11 +43,11 @@ public class TelaLogin extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jLogin = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jSenha = new javax.swing.JPasswordField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -98,25 +102,22 @@ public class TelaLogin extends javax.swing.JFrame {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icons8-usuário-50.png"))); // NOI18N
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
-        jLogin.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLogin.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jLoginKeyPressed(evt);
-            }
-        });
-        jPanel3.add(jLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 21, 199, 40));
-
         jLabel5.setBackground(new java.awt.Color(153, 153, 153));
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icons8-senha-50.png"))); // NOI18N
         jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 79, -1, -1));
 
         jSenha.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jSenhaActionPerformed(evt);
+            }
+        });
         jSenha.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jSenhaKeyPressed(evt);
             }
         });
-        jPanel3.add(jSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 89, 199, 40));
+        jPanel3.add(jSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 199, 40));
 
         jLabel6.setBackground(new java.awt.Color(153, 153, 153));
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icons8-divisa-circulada-à-direita-50.png"))); // NOI18N
@@ -138,10 +139,22 @@ public class TelaLogin extends javax.swing.JFrame {
         });
         jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 147, -1, -1));
 
+        jComboBox1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jComboBox1FocusGained(evt);
+            }
+        });
+        jPanel3.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, 200, 40));
+
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, -1, -1));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/background (2)_1.jpg"))); // NOI18N
         jLabel9.setText("jLabel9");
+        jLabel9.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jLabel9FocusGained(evt);
+            }
+        });
         jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 400, 280));
@@ -172,33 +185,47 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
 
-        if(jLogin.getText().equals("a")&& new String(jSenha.getPassword()).equals("a")){
-            
-            this.dispose();
-            new TelaAgenda().setVisible(true);
-        }
-        else{
-            this.dispose();
-        }
+//        if(jLogin.getText().equals("a")&& new String(jSenha.getPassword()).equals("a")){
+//            
+//            this.dispose();
+//            new TelaAgenda().setVisible(true);
+//        }
+//        else{
+//            this.dispose();
+//        }
     }//GEN-LAST:event_jLabel6MouseClicked
-
+    public void atualizaComb(){
+        jComboBox1.removeAllItems();
+        UsuarioDAO cdao = new UsuarioDAO();
+        for(Usuario c: cdao.read()){
+           jComboBox1.addItem(c);
+        }
+    }
+    @Override
+    public void revalidate() {
+        this.atualizaComb(); //To change body of generated methods, choose Tools | Templates.
+    }
     private void jSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jSenhaKeyPressed
         if(evt.getKeyCode() == 10){
-            if(jLogin.getText().equals("a")&& new String(jSenha.getPassword()).equals("a")){
+            if(check()){
                 this.dispose();
                 new TelaAgenda().setVisible(true);
             }
             else{
-                this.dispose();
+                JOptionPane.showMessageDialog(this, "Senha incorreta!");
             }
         }
+       
     }//GEN-LAST:event_jSenhaKeyPressed
-
-    private void jLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLoginKeyPressed
-        if(evt.getKeyCode() == 10)
-        jSenha.requestFocus(); 
-    }//GEN-LAST:event_jLoginKeyPressed
-
+    public boolean check(){
+        UsuarioDAO udao = new UsuarioDAO();
+        Usuario u = (Usuario) jComboBox1.getSelectedItem();
+        String a = udao.readLogin(u);
+        if(a.equals(jSenha.getText().toString())){
+            return true;
+        }
+        return false;
+    }
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         int X = evt.getXOnScreen();
         int Y = evt.getYOnScreen();
@@ -208,6 +235,18 @@ public class TelaLogin extends javax.swing.JFrame {
         a.setAlwaysOnTop (true);
         a.setVisible(true);
     }//GEN-LAST:event_jLabel7MouseClicked
+
+    private void jSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSenhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jSenhaActionPerformed
+
+    private void jLabel9FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jLabel9FocusGained
+     //  this.revalidate();
+    }//GEN-LAST:event_jLabel9FocusGained
+
+    private void jComboBox1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jComboBox1FocusGained
+        this.revalidate();
+    }//GEN-LAST:event_jComboBox1FocusGained
 
     /**
      * @param args the command line arguments
@@ -245,6 +284,7 @@ public class TelaLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<Object> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -253,7 +293,6 @@ public class TelaLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jLogin;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
