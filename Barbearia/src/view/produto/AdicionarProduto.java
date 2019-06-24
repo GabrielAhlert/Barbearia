@@ -186,13 +186,13 @@ public class AdicionarProduto extends javax.swing.JFrame {
             
             boolean resultado = pdao.inserirProduto(p);
             if(resultado){
-            JOptionPane.showMessageDialog(this, "Produto: "+jTNome.getText()+" cadastrado com sucesso");
+            JOptionPane.showMessageDialog(this, "Cadastrado efetuado com sucesso");
             this.dispose();
             }else{
-            JOptionPane.showMessageDialog(this, "Cadastro não efetuado","ERRO",2);
+            JOptionPane.showMessageDialog(this, "Erro ao efetuar cadastro");
             }
         }else{
-            JOptionPane.showMessageDialog(this, "Cadastro não efetuado, campo em branco","ERRO",2);
+            JOptionPane.showMessageDialog(this, "Cadastro não efetuado, dados invalidos","ERRO",2);
         }
         
         

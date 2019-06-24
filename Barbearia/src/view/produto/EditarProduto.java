@@ -188,7 +188,7 @@ public class EditarProduto extends javax.swing.JFrame {
               JOptionPane.showMessageDialog(this, "Update efetuado com sucesso");  
               this.dispose();
             }else{
-              JOptionPane.showMessageDialog(this, "Update não efetuado","ERRO",2);  
+              JOptionPane.showMessageDialog(this, "Erro ao efetuar update","ERRO",2);  
             }
         }else{
            JOptionPane.showMessageDialog(this, "Update não efetuado, nenhum dado alterado","ERRO",2);

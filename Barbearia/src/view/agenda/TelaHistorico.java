@@ -244,7 +244,7 @@ public class TelaHistorico extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Data/hora", "Cliente", "Servico", "Valor serviço", "Valor Total (servico + produto(s))"
+                "Data/hora", "Cliente", "Serviço", "Valor serviço", "Valor Total (serviço + produto(s))"
             }
         ) {
             boolean[] canEdit = new boolean [] {

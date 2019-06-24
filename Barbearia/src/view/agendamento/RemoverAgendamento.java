@@ -75,7 +75,7 @@ public class RemoverAgendamento extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setText("Desagendar");
+        jLabel1.setText("Desagendar serviço");
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icons8-fechar-janela-50-Tranparente.png"))); // NOI18N
         jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -107,10 +107,6 @@ public class RemoverAgendamento extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(133, 133, 133))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jLabel8)
@@ -123,6 +119,10 @@ public class RemoverAgendamento extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addGap(99, 99, 99))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,12 +181,12 @@ public class RemoverAgendamento extends javax.swing.JFrame {
         boolean resultado = adao.excluirAgendamento(a);
         boolean resultado1 = padao.excluirProdutoAgendamento(a.getDataH());
         if (resultado && resultado1){
-            JOptionPane.showMessageDialog(this, "Exclusão feita com sucesso!");
+            JOptionPane.showMessageDialog(this, "Exclusão efetuada com sucesso!");
             TelaAgenda frame = new TelaAgenda();
             //frame.revalidate();
             this.dispose();
         }else{
-            JOptionPane.showMessageDialog(this, "Exclusão não efetuada","ERRO",2);
+            JOptionPane.showMessageDialog(this, "Erro ao efetuar a exclução","ERRO",2);
         }
     }//GEN-LAST:event_jLabel7MouseClicked
 

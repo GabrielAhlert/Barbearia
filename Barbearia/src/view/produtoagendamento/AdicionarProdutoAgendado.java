@@ -98,7 +98,7 @@ public class AdicionarProdutoAgendado extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setText("Gerenciar Produto ao Agendamento");
+        jLabel1.setText("Gerenciar agendamento de produto(s)");
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icons8-calendário-50_1.png"))); // NOI18N
 
@@ -161,9 +161,9 @@ public class AdicionarProdutoAgendado extends javax.swing.JFrame {
                 .addGap(87, 87, 87))
             .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
@@ -174,7 +174,7 @@ public class AdicionarProdutoAgendado extends javax.swing.JFrame {
                         .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -266,15 +266,15 @@ public class AdicionarProdutoAgendado extends javax.swing.JFrame {
        boolean resultado = padao.inserirProdutoAgendamento(pa);
        
        if(resultado){
-           JOptionPane.showMessageDialog(this, "Sucesso"); 
+           JOptionPane.showMessageDialog(this, "Produto adicionado com sucesso"); 
            this.preenche();
        }else{
            boolean resultado1 = padao.updateProdutoAgendamento(pa);
            if(resultado1){
-           JOptionPane.showMessageDialog(this, "quantia atualizada");   
+           JOptionPane.showMessageDialog(this, "Quantia atualizada com sucesso");   
            this.preenche();
            }else{
-             JOptionPane.showMessageDialog(this, "fatal error kk");     
+             JOptionPane.showMessageDialog(this, "Erro ao atualizar quantia");     
            }
        }
            

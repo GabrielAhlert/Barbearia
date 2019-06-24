@@ -183,13 +183,13 @@ public class AdicionarServico extends javax.swing.JFrame {
    
         boolean resultado = dao.inserirServico(s);
         if (resultado){
-            JOptionPane.showMessageDialog(this, "Inserido com sucesso!");
+            JOptionPane.showMessageDialog(this, "Cadastro efetuado com sucesso!");
             this.dispose();
         }else{
-            JOptionPane.showMessageDialog(this, "Cadastro não efetuado","ERRO",2);
+            JOptionPane.showMessageDialog(this, "Erro ao efetuar cadastro");
         }
       }else{
-          JOptionPane.showMessageDialog(this, "Cadastro não efetuado, campo em branco","ERRO",2);
+          JOptionPane.showMessageDialog(this, "Cadastro não efetuado, dados invalidos","ERRO",2);
       }  
         
     }//GEN-LAST:event_jLabel6MouseClicked

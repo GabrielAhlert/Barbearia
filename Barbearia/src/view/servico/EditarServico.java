@@ -183,15 +183,15 @@ public class EditarServico extends javax.swing.JFrame {
             
             boolean resultado = sdao.updateServico(s);
             if(resultado){
-             JOptionPane.showMessageDialog(this, "Update Suceso");
+             JOptionPane.showMessageDialog(this, "Update efetuado Suceso");
              this.dispose();
             }else{
-             JOptionPane.showMessageDialog(this, "Update não efetuado","ERRO",2);
+             JOptionPane.showMessageDialog(this, "Erro ao efetuar update");
 
             }
             
         }else{
-             JOptionPane.showMessageDialog(this, "Update não efetuado, nenhum dado alterado","ERRO",2);
+             JOptionPane.showMessageDialog(this, "Update não efetuado, dados invalidos","ERRO",2);
 
         }
         

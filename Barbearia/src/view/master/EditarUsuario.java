@@ -168,10 +168,10 @@ public class EditarUsuario extends javax.swing.JFrame {
            u.setSenha(jPasswordField1.getText());
            boolean resultado = usao.updateUsuario(u);
            if(resultado){
-               JOptionPane.showMessageDialog(this, "Senha atualizada com sucesso!");
+               JOptionPane.showMessageDialog(this, "Update efetuado com sucesso!");
                this.dispose();
            }else{
-               JOptionPane.showMessageDialog(this, "Erro ao atualizar senha!");
+               JOptionPane.showMessageDialog(this, "Erro ao efetuar update");
            }
        }else{
            JOptionPane.showMessageDialog(this, "A campo com a nova senha não pode estar vazia!","ERRO",2);

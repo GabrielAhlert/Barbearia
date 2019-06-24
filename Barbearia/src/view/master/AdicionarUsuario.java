@@ -197,14 +197,14 @@ public class AdicionarUsuario extends javax.swing.JFrame {
            UsuarioDAO udao = new UsuarioDAO();
            boolean resultado = udao.inserirUsuario(u);
            if(resultado){
-            JOptionPane.showMessageDialog(this, "Usuario adicionado com sucesso");
+            JOptionPane.showMessageDialog(this, "Cadastro efetuado com sucesso");
               this.dispose();
            }else{
-           JOptionPane.showMessageDialog(this, "Erro ao adicionar usuario");
+           JOptionPane.showMessageDialog(this, "Erro ao efetuar cadastro");
                
            }
        }else{
-           JOptionPane.showMessageDialog(this, "Dados invalidos");
+           JOptionPane.showMessageDialog(this, "Erro ao efetuar cadastro, dados invalidos");
        }
     }//GEN-LAST:event_jLabel6MouseClicked
     public boolean check(){

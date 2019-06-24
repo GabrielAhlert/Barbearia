@@ -128,10 +128,7 @@ public class AdicionarCliente extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(96, 96, 96)
-                        .addComponent(jLabel1)))
+                        .addComponent(jTEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(30, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(79, 79, 79)
@@ -139,6 +136,10 @@ public class AdicionarCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addGap(88, 88, 88))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,10 +213,10 @@ public class AdicionarCliente extends javax.swing.JFrame {
         boolean resultado = cdao.inserirCliente(cliente);
         
         if(resultado){
-                JOptionPane.showMessageDialog(this, "Sucesso");
+                JOptionPane.showMessageDialog(this, "Cadastro efetuado com sucesso");
                 this.dispose();
             }else{
-                JOptionPane.showMessageDialog(this, "Cadastro não efetuado","ERRO",2);
+                JOptionPane.showMessageDialog(this, "Erro ao efetuar cadastro");
             }
         }else{
                JOptionPane.showMessageDialog(this, "Cadastro não efetuado, dados invalidos","ERRO",2);
