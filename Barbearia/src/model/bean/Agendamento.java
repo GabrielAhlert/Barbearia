@@ -95,6 +95,15 @@ public class Agendamento implements Comparable {
        
         return String.valueOf(sd1.format(d)) ;
     }
+    public String getData_h(){
+        Date d =  new Date();
+        SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sd1 = new SimpleDateFormat("yyyy/MM/dd HH:mm");//formato do banco ano mes dia
+        d = this.data_hora;
+       
+        return String.valueOf(sd1.format(d)) ;
+    }
+
 
     @Override
     public int compareTo(Object o) {

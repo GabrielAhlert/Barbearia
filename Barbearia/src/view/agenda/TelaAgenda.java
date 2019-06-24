@@ -78,7 +78,7 @@ public class TelaAgenda extends javax.swing.JFrame {
                 s.getQuantidades(),
                 s.getProduto().getPreco(),
                 s.getValorTotal(),
-              //  s.getAgendamento().getServico().getPreco() + s.getValorTotal()
+                s.getAgendamento().getServico().getPreco() + s.getValorTotal()
                 
                        
             });
@@ -104,7 +104,7 @@ public class TelaAgenda extends javax.swing.JFrame {
                 s.getCliente().getNome(),
                 s.getServico().getNome(),
                 s.getServico().getPreco(),
-                this.mostraProduto(s.toString()) + s.getServico().getPreco()
+                this.mostraProduto(s.getData_h()) + s.getServico().getPreco()
                 
                        
             });

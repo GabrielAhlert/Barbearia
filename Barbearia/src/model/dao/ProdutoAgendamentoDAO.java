@@ -9,8 +9,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -116,7 +119,18 @@ public class ProdutoAgendamentoDAO {
         
     }
      public List<ProdutoAgendamento> readP(String t) {
-          
+          //converter formato
+        Date d =  new Date();
+        SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        SimpleDateFormat sd1 = new SimpleDateFormat("yyyy/MM/dd");//formato do banco ano mes dia
+        SimpleDateFormat sd2 = new SimpleDateFormat("yyyy/MM/dd HH:mm");//formato do banco ano mes dia
+        try {
+            d = sd.parse(t);
+            String a = sd2.format(d);
+            t = a;
+        } catch (ParseException ex) {
+            Logger.getLogger(ProdutoAgendamentoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
                List<ProdutoAgendamento>  resultados = new ArrayList<>();  
         String sql = "SELECT nome_produto, produto.preco AS precop, servico.preco AS precos, cod_produto, cod_agendamento,cod_servico ,quantidade FROM produto_agendamento pa " +
                      "JOIN produto ON produto.codigo = pa.cod_produto " +

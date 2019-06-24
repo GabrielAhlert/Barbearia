@@ -21,7 +21,7 @@ public class Conexao {
     private static Connection conn;
     private final static String driver = "org.postgresql.Driver";
     private final static String ip = "localhost/";
-    public static String dataBase = "Barbearia";
+    public static String dataBase = "agendaBarbearia";
     public static String user = "postgres";
     public static String password = "666forever";
 

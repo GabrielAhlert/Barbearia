@@ -78,7 +78,7 @@ public class TelaHistorico extends javax.swing.JFrame {
                 s.getQuantidades(),
                 s.getProduto().getPreco(),
                 s.getValorTotal(),
-              //  s.getAgendamento().getServico().getPreco() + s.getValorTotal()
+                s.getAgendamento().getServico().getPreco() + s.getValorTotal()
                 
                        
             });

@@ -49,7 +49,7 @@ public class AgendamentoDAO {
     }
     
     public List<Agendamento> read() {
-        SimpleDateFormat sd = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        SimpleDateFormat sd = new SimpleDateFormat("yyyy/MM/dd");
         Date dataAtual = new Date(System.currentTimeMillis());
         String data = sd.format(dataAtual);  
         
