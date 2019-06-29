@@ -85,6 +85,23 @@ public class Agendamento implements Comparable {
     private Cliente cliente;
     private Servico servico;
     private Timestamp data_hora;
+    private Integer status;
+
+    public Timestamp getData_hora() {
+        return data_hora;
+    }
+
+    public void setData_hora(Timestamp data_hora) {
+        this.data_hora = data_hora;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 
     @Override
     public String toString() {

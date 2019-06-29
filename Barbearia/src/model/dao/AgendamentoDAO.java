@@ -26,8 +26,20 @@ import model.bean.Servico;
  */
 public class AgendamentoDAO {
     
+    public boolean updateStatus(String d,int i) {
+        String sql = "UPDATE agendamento SET status = "+i+" WHERE data_hora = '"+d+"'";//"sintax padrão do SQL"
+        try {
+            PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
+    
     public boolean inserirAgendamento(Agendamento a) {
-        String sql = "INSERT INTO agendamento (data_hora, valor_total, cod_cliente, cod_servico) VALUES ('"+a.getDataHora() +"', ?, ?,?)";//"sintax padrão do SQL"
+        String sql = "INSERT INTO agendamento (data_hora, valor_total, cod_cliente, cod_servico, status) VALUES ('"+a.getDataHora() +"', ?, ?,?,1)";//"sintax padrão do SQL"
         try {
             PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);
         //    Timestamp t = (Timestamp) a.getDataHora();
@@ -54,7 +66,7 @@ public class AgendamentoDAO {
         String data = sd.format(dataAtual);  
         
         List<Agendamento>  resultados = new ArrayList<>();  
-        String sql = "SELECT data_hora, valor_total, cod_servico, " +
+        String sql = "SELECT data_hora, valor_total, cod_servico, status, " +
                     "cod_cliente, nome, preco, nome_servico FROM agendamento JOIN cliente ON cliente.codigo = agendamento.cod_cliente " +
                     "JOIN servico ON servico.codigo = cod_servico WHERE data_hora >= '"+data+"'";
         PreparedStatement ps;
@@ -77,6 +89,7 @@ public class AgendamentoDAO {
                 a.setServico(s);
                 a.setCliente(c);
                 a.setDataH(rs.getTimestamp("data_hora"));
+                a.setStatus(rs.getInt("status"));
                 
 //                //nome da tabela do banco de dados
 //                a.setDataH(rs.getString("data_hora"));
@@ -104,7 +117,7 @@ public class AgendamentoDAO {
     public List<Agendamento> readSelec(String t, String t1) {
           
         List<Agendamento>  resultados = new ArrayList<>();  
-        String sql = "SELECT data_hora, valor_total, cod_servico, " +
+        String sql = "SELECT data_hora, valor_total, cod_servico, status, " +
                     "cod_cliente, nome, preco, nome_servico FROM agendamento JOIN cliente ON cliente.codigo = agendamento.cod_cliente " +
                     "JOIN servico ON servico.codigo = cod_servico WHERE data_hora BETWEEN '"+t+" 00:00' AND '"+t1+" 23:59'";
         PreparedStatement ps;
@@ -127,6 +140,7 @@ public class AgendamentoDAO {
                 a.setServico(s);
                 a.setCliente(c);
                 a.setDataH(rs.getTimestamp("data_hora"));
+                a.setStatus(rs.getInt("status"));
                 
 //                //nome da tabela do banco de dados
 //                a.setDataH(rs.getString("data_hora"));

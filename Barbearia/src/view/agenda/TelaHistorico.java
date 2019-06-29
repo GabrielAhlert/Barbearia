@@ -244,11 +244,11 @@ public class TelaHistorico extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Data/hora", "Cliente", "Serviço", "Valor serviço", "Valor Total (serviço + produto(s))"
+                "Data/hora", "Cliente", "Status", "Serviço", "Valor serviço", "Valor Total (serviço + produto(s))"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -347,6 +347,11 @@ public class TelaHistorico extends javax.swing.JFrame {
                 jFormattedTextField3ActionPerformed(evt);
             }
         });
+        jFormattedTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jFormattedTextField3KeyPressed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel5.setText("Historico de agendamentos");
@@ -379,7 +384,7 @@ public class TelaHistorico extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -388,9 +393,9 @@ public class TelaHistorico extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jFormattedTextField3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -524,7 +529,13 @@ public class TelaHistorico extends javax.swing.JFrame {
     }//GEN-LAST:event_jFormattedTextField3ActionPerformed
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
-            String dataInicio = jFormattedTextField2.getText();
+            
+        this.buscar();
+                
+    }//GEN-LAST:event_jLabel7MouseClicked
+
+    private void buscar(){
+         String dataInicio = jFormattedTextField2.getText();
             String dataFim = jFormattedTextField3.getText();
             SimpleDateFormat sd1 = new SimpleDateFormat("yyyy/MM/dd");
             SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
@@ -538,9 +549,28 @@ public class TelaHistorico extends javax.swing.JFrame {
          } catch (ParseException ex) {
              Logger.getLogger(TelaHistorico.class.getName()).log(Level.SEVERE, null, ex);
          }
-                
-    }//GEN-LAST:event_jLabel7MouseClicked
-
+    }
+    
+    private void jFormattedTextField3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFormattedTextField3KeyPressed
+        if(evt.getKeyCode() == 10){
+            this.buscar();
+        }
+    }//GEN-LAST:event_jFormattedTextField3KeyPressed
+    private String statusAgendamento(int s){
+        String a = null;
+        switch(s){
+            case 1:
+                a = "Agendado";
+                break;
+            case 2:
+                a = "Efetuado";
+                break;
+            case 3:
+                a = "Cancelado";
+                break;
+        }
+        return a;
+    }
     void mostra(String t, String t1){
         limpaTabela();
         limpaTabela1();
@@ -551,6 +581,7 @@ public class TelaHistorico extends javax.swing.JFrame {
    
                 s.toString(),
                 s.getCliente().getNome(),
+                this.statusAgendamento(s.getStatus()),
                 s.getServico().getNome(),
                 s.getServico().getPreco(),
                 this.mostraProduto(s.toString()) + s.getServico().getPreco()
