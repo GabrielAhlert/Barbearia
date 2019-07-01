@@ -591,7 +591,7 @@ public class TelaAgenda extends javax.swing.JFrame {
              AgendamentoDAO adao = new AgendamentoDAO();
              boolean resultado = adao.updateStatus(a, d);
              if(resultado){
-              //   JOptionPane.showMessageDialog(this, "Sucesso ao alterar o status");
+                // JOptionPane.showMessageDialog(this, "Sucesso ao alterar o status");
                  this.mostra();
              }
              

@@ -556,11 +556,28 @@ public class TelaHistorico extends javax.swing.JFrame {
             this.buscar();
         }
     }//GEN-LAST:event_jFormattedTextField3KeyPressed
-    private String statusAgendamento(int s){
-        String a = null;
+    private String statusAgendamento(int s, String da){
+        String a = "Agendado";
         switch(s){
             case 1:
-                a = "Agendado";
+                SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                java.util.Date dataAtual = new java.util.Date(System.currentTimeMillis());
+                String data = sd.format(dataAtual);    
+        {
+            try {
+                java.util.Date dataAgendamento = sd.parse(da);
+               int r =  dataAgendamento.compareTo(dataAtual);
+                if(r == 1){
+                   a = "Agendado";
+                }else if( r == -1){
+                    a = "Efetuado";
+                     AgendamentoDAO adao = new AgendamentoDAO();
+                adao.updateStatus(da, s);
+                }
+            } catch (ParseException ex) {
+                Logger.getLogger(TelaHistorico.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
                 break;
             case 2:
                 a = "Efetuado";
@@ -571,6 +588,7 @@ public class TelaHistorico extends javax.swing.JFrame {
         }
         return a;
     }
+    
     void mostra(String t, String t1){
         limpaTabela();
         limpaTabela1();
@@ -581,7 +599,7 @@ public class TelaHistorico extends javax.swing.JFrame {
    
                 s.toString(),
                 s.getCliente().getNome(),
-                this.statusAgendamento(s.getStatus()),
+                this.statusAgendamento(s.getStatus(),s.toString()),
                 s.getServico().getNome(),
                 s.getServico().getPreco(),
                 this.mostraProduto(s.toString()) + s.getServico().getPreco()
