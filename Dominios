@@ -2,7 +2,7 @@
 --não pode ser menor que 0
 
 CREATE DOMAIN dvalor
-     AS Double Precission
+     AS Double Precision
   CHECK (value >= 0)
 -----------------------------------------------
 
