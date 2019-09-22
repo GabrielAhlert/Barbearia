@@ -1,0 +1,52 @@
+CREATE TABLE produto(
+	codigo SERIAL,
+	nome_produto VARCHAR NOT NULL,
+	preco dvalor NOT NULL,
+	estoque destoque NOT NULL,
+	CONSTRAINT pk_produto PRIMARY KEY (codigo)
+)
+
+CREATE TABLE servico(
+	codigo SERIAL,
+	nome_servico VARCHAR NOT NULL,
+	preco dvalor NOT NULL,
+	CONSTRAINT pk_servico PRIMARY KEY (codigo)
+)
+
+CREATE TABLE cliente(
+	codigo SERIAL,
+	nome VARCHAR NOT NULL,
+	email VARCHAR,
+	telefone dtelefone,
+	CONSTRAINT pk_cliente PRIMARY KEY (codigo)
+
+)
+
+CREATE TABLE agendamento(
+	data_hora TIMESTAMP NOT NULL,
+	valor_total DOUBLE PRECISION,
+	cod_servico INTEGER NOT NULL,
+	cod_cliente INTEGER NOT NULL,
+	status dstatus NOT NULL,
+	CONSTRAINT pk_agendamento PRIMARY KEY (data_hora),
+	CONSTRAINT fk_servico FOREIGN KEY (cod_servico) REFERENCES servico (codigo),
+	CONSTRAINT fk_cliente FOREIGN KEY (cod_cliente) REFERENCES cliente (codigo) ON DELETE CASCADE
+
+)
+CREATE TABLE usuario(
+	codigo serial,
+    nome varchar NOT NULL,
+    login varchar NOT NULL,
+    senha dsenha" NOT NULL,
+    CONSTRAINT pk_usuario PRIMARY KEY (codigo)
+	
+)
+CREATE TABLE produto_agendamento(
+	cod_produto INTEGER NOT NULL,
+	cod_agendamento TIMESTAMP NOT NULL,
+	quantidade INTEGER NOT NULL,
+	CONSTRAINT pk_produto_agendamento PRIMARY KEY (cod_produto, cod_agendamento),
+	CONSTRAINT fk_produto_agendamento1 FOREIGN KEY (cod_produto) REFERENCES produto (codigo),
+	CONSTRAINT fk_produto_agendamento2 FOREIGN KEY (cod_agendamento) REFERENCES agendamento (data_hora)
+
+)
