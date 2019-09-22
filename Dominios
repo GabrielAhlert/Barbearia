@@ -1,0 +1,44 @@
+--Define que o valor de um produto ou serviço
+--não pode ser menor que 0
+
+CREATE DOMAIN dvalor
+     AS Double Precission
+  CHECK (value >= 0)
+-----------------------------------------------
+
+--dstatus aceita somente os caracteres 0, 1 e 2
+--que representa respectivamente agendado,
+--concluído e cancelado
+
+CREATE DOMAIN dstatus 
+    AS SMALLINT
+ CHECK (VALUE IN (0,1,2)); 
+-----------------------------------------------
+
+--Define que o estoque de um determinado
+--produto não pode estar abaixo de 0
+
+CREATE DOMAIN destoque
+     AS integer
+  CHECK (value >= 0)
+------------------------------------------------
+
+--dtelefone aceita somente palavras com no
+--mínimo de 15 caracteres, máscara + ddd + 8 caracteres
+
+--OBS: não encontrei uma maneira de fazer esse domino corretamente, então
+--só coloquei o nome, vamos fazer via programação e foda-se o mundo
+
+CREATE DOMAIN dtelefone 
+     AS VARCHAR(17)
+ -----------------------------------------------
+
+--dsenha aceita somente palavras com no minimo
+--6 caracteres sendo que o primeiro não pode ser espaço em branco
+
+--OBS: não encontrei uma maneira de fazer esse domino corretamente, então
+--só coloquei o nome, vamos fazer via programação e foda-se o mundo
+
+CREATE DOMAIN dsenha 
+     AS VARCHAR(25)
+
