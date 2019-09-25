@@ -37,7 +37,7 @@ CREATE TABLE usuario(
 	codigo serial,
     nome varchar NOT NULL,
     login varchar NOT NULL,
-    senha dsenha" NOT NULL,
+    senha dsenha NOT NULL,
     CONSTRAINT pk_usuario PRIMARY KEY (codigo)
 	
 );
