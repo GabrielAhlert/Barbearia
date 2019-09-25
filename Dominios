@@ -1,9 +1,9 @@
---Define que o valor de um produto ou serviço
+﻿--Define que o valor de um produto ou serviço
 --não pode ser menor que 0
 
 CREATE DOMAIN dvalor
      AS Double Precision
-  CHECK (value >= 0)
+  CHECK (value >= 0);
 -----------------------------------------------
 
 --dstatus aceita somente os caracteres 0, 1 e 2
@@ -20,7 +20,7 @@ CREATE DOMAIN dstatus
 
 CREATE DOMAIN destoque
      AS integer
-  CHECK (value >= 0)
+  CHECK (value >= 0);
 ------------------------------------------------
 
 --dtelefone aceita somente palavras com no
@@ -30,7 +30,7 @@ CREATE DOMAIN destoque
 --só coloquei o nome, vamos fazer via programação e foda-se o mundo
 
 CREATE DOMAIN dtelefone 
-     AS VARCHAR(17)
+     AS VARCHAR(17);
  -----------------------------------------------
 
 --dsenha aceita somente palavras com no minimo
@@ -40,5 +40,5 @@ CREATE DOMAIN dtelefone
 --só coloquei o nome, vamos fazer via programação e foda-se o mundo
 
 CREATE DOMAIN dsenha 
-     AS VARCHAR(25)
+     AS VARCHAR(25);
 
