@@ -1,0 +1,11 @@
+-- 1o gatilho, coloca valor unitário no produto_agendamento
+
+CREATE OR REPLACE FUNCTION produto_agendamento_gatilho() RETURNS trigger AS $produto_agendamento_gatilho$
+    BEGIN
+       	NEW.valor_un :=(SELECT preco FROM produto WHERE codigo = NEW.cod_produto);
+        RETURN NEW;
+    END;
+$produto_agendamento_gatilho$ LANGUAGE plpgsql;
+
+CREATE TRIGGER produto_agendamento_gatilho BEFORE INSERT OR UPDATE ON produto_agendamento
+    FOR EACH ROW EXECUTE PROCEDURE produto_agendamento_gatilho();
