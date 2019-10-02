@@ -13,8 +13,16 @@ public class Produto implements Comparable{
     
     private Integer codigo;
     private String nome;
+    private int quantidade;
     private double preco;
 
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    } 
     public int getCodigo() {
         return codigo;
     }

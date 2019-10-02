@@ -24,11 +24,12 @@ import model.bean.Produto;
 public class ProdutoDAO {
     
     public boolean inserirProduto(Produto p) {
-        String sql = "INSERT INTO produto (nome_produto, preco) VALUES (?, ?)";//"sintax padrão do SQL"
+        String sql = "INSERT INTO produto (nome_produto, preco, estoque) VALUES (?, ?, ?)";//"sintax padrão do SQL"
         try {
             PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);
             ps.setString(1, p.getNome());
             ps.setDouble(2, p.getPreco());
+            ps.setInt(3, p.getQuantidade());
             ps.executeUpdate();
             return true;
         } catch (SQLException | ClassNotFoundException ex) {

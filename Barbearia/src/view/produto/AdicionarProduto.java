@@ -38,10 +38,12 @@ public class AdicionarProduto extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jFValor = new javax.swing.JFormattedTextField();
         jTNome = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jFValor = new javax.swing.JTextField();
+        jFQuantidade = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -62,14 +64,6 @@ public class AdicionarProduto extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icons8-lata-de-cerveja-50.png"))); // NOI18N
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icons8-barato-2-50.png"))); // NOI18N
-
-        jFValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("¤#,##0"))));
-        jFValor.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jFValor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFValorActionPerformed(evt);
-            }
-        });
 
         jTNome.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jTNome.addActionListener(new java.awt.event.ActionListener() {
@@ -94,33 +88,53 @@ public class AdicionarProduto extends javax.swing.JFrame {
             }
         });
 
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icons8-lista-50.png"))); // NOI18N
+
+        jFValor.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jFValor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFValorActionPerformed(evt);
+            }
+        });
+
+        jFQuantidade.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jFQuantidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFQuantidadeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(84, 84, 84)
+                .addGap(83, 83, 83)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addGap(74, 74, 74))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTNome, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFValor, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(96, 96, 96)
-                        .addComponent(jLabel1)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jFQuantidade)
+                            .addComponent(jFValor))))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,11 +151,15 @@ public class AdicionarProduto extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jFValor)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(13, 13, 13)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(jFQuantidade))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(jLabel5))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -152,7 +170,7 @@ public class AdicionarProduto extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -165,10 +183,6 @@ public class AdicionarProduto extends javax.swing.JFrame {
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         this.dispose();   // TODO add your handling code here:
     }//GEN-LAST:event_jLabel5MouseClicked
-
-    private void jFValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFValorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFValorActionPerformed
 
     private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
         //this.dispose();        // TODO add your handling code here:
@@ -183,7 +197,8 @@ public class AdicionarProduto extends javax.swing.JFrame {
             
             p.setNome(jTNome.getText());
             p.setPreco(Double.parseDouble(jFValor.getText().toString()));
-            
+            p.setQuantidade(Integer.parseInt(jFQuantidade.getText()));
+            System.out.println(p.getQuantidade());
             boolean resultado = pdao.inserirProduto(p);
             if(resultado){
             JOptionPane.showMessageDialog(this, "Cadastrado efetuado com sucesso");
@@ -197,6 +212,14 @@ public class AdicionarProduto extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void jFValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFValorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFValorActionPerformed
+
+    private void jFQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFQuantidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFQuantidadeActionPerformed
 
     boolean check(){
         if(jTNome.getText().toString().isEmpty() || jFValor.getText().toString().isEmpty()){
@@ -244,12 +267,14 @@ public class AdicionarProduto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JFormattedTextField jFValor;
+    private javax.swing.JTextField jFQuantidade;
+    private javax.swing.JTextField jFValor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTNome;
