@@ -9,3 +9,63 @@ $produto_agendamento_gatilho$ LANGUAGE plpgsql;
 
 CREATE TRIGGER produto_agendamento_gatilho BEFORE INSERT OR UPDATE ON produto_agendamento
     FOR EACH ROW EXECUTE PROCEDURE produto_agendamento_gatilho();
+
+-- 2 e 3 , verifica se não tem agendamento no lugar
+
+CREATE OR REPLACE FUNCTION fun_verifica_agendamentos() RETURNS "trigger" AS
+$fun_verifica_agendamentos$
+    BEGIN
+        IF EXISTS (
+            SELECT 1
+                FROM agendamento
+                WHERE data_hora = NEW.data_hora
+        )
+        THEN
+            RAISE EXCEPTION 'impossível agendar - existe outro agendamento';
+        END IF;
+        RETURN NEW;
+    END;
+$fun_verifica_agendamentos$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_agendamentos_ins
+    BEFORE INSERT ON agendamento
+    FOR EACH ROW
+    EXECUTE PROCEDURE fun_verifica_agendamentos();
+
+CREATE TRIGGER trg_agendamentos_upd
+    BEFORE UPDATE ON agendamento
+    FOR EACH ROW
+    EXECUTE PROCEDURE fun_verifica_agendamentos();
+-- 4 e 5 Verifica o estoque
+
+CREATE OR REPLACE FUNCTION fun_verifica_estoque() RETURNS "trigger" AS
+$fun_verifica_estoque$
+    BEGIN
+        IF NEW.quantidade >
+            (
+				SELECT estoque
+                FROM produto
+                WHERE codigo = NEW.cod_produto
+			)
+        THEN
+            RAISE EXCEPTION 'Estoque Insuficiente!';
+		ELSE
+			UPDATE produto
+			SET estoque = ((	SELECT estoque
+                				FROM produto
+                				WHERE codigo = NEW.cod_produto)-NEW.quantidade)
+			WHERE codigo = NEW.cod_produto ;
+        END IF;
+        RETURN NEW;
+    END;
+$fun_verifica_estoque$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_produto_agendamentos_ins
+    BEFORE INSERT ON produto_agendamento
+    FOR EACH ROW
+    EXECUTE PROCEDURE fun_verifica_estoque();
+
+CREATE TRIGGER trg_produto_agendamentos_upd
+    BEFORE UPDATE ON produto_agendamento
+    FOR EACH ROW
+    EXECUTE PROCEDURE fun_verifica_estoque();
